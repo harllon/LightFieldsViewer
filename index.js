@@ -1,6 +1,6 @@
 var express = require('express');
 const path = require('path');
-const testFolder = './public/assets';
+const testFolder = './public/airplane';
 const fs = require('fs');
 var app = express();
 
@@ -21,18 +21,25 @@ app.listen(PORT, function() {
 });
 
 //
+var data = {}
+data.table = []
 var i = 0;
-var imgArray = new Array();
+//var imgArray = new Array();
 fs.readdir(testFolder, (err, files) => {
+  var obj2 = {size: files.length}
+  data.table.push(obj2)
   files.forEach(file => {
     console.log(file);
-    imgArray[i] = file;
+    var obj = {
+      id: i,
+      filename: testFolder + "/" + file
+    }
+    //imgArray[i] = file;
+    data.table.push(obj)
     i++;
   });
 });
 
-app.post('/', function(req, res){
-    res.send(imgArray[0]);
+app.get('/public', (req, res) => {
+  res.json(data);
 });
-
-exports.exportedVar = i;
