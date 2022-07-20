@@ -1,132 +1,181 @@
-/*var imgArray = new Array();
-        
-        //imgArray[0] = new Image();
-        //imgArray[0].src = 'img/00.png';
-var eof = false;
-var i = 0;*/
-        /*const fs = require('fs');
-        filenames = fs.readdirSync(__dirname);
-        console.log("\nCurrent directory filenames:");
-        filenames.forEach(file => {
-            console.log(file);
-        });*/
-        
-/*while(i<64){
-    try {
-        var j = i + 1;
-                var file = 'img/airplane/' + j + '.png';
-                imgArray[i] = new Image();
-                imgArray[i].src = file;
-                i++;
-                //throw "myException"; // gera uma exceção
-            }
-            catch (e) {
-                // declarações para manipular quaisquer exceções
-                eof = true; // passa o objeto de exceção para o manipulador de erro
-            }
+var buttonGreek = document.getElementById("greek")
+var buttonSideboard = document.getElementById("sideboard")
+var buttonBike = document.getElementById("bike")
+var buttonTarot = document.getElementById("tarot")
 
-        }*/
+var files;
+var size2;
 
-        /*
-        var matrixArray = new Array();
-        var j = 0;
-        for(var i=0; i<3;i++){
-            matrixArray[i] = new Array();
-            goal = true;
-            while(goal == true && j < 9){
-                matrixArray[i].push(imgArray[j]);
-                j++;
-                if(j%3 == 0){
-                    goal = false;
-                }
-            }
-        }*/
+buttonBike.onclick = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://localhost:3000/public/bikes');
+    xhr.send();
 
-/*function loadImage(i, j, matrixArray){
-    document.getElementById("mainImage").src = matrixArray[i][j].src;
-}
+    xhr.onload = async function() {
+        files = await JSON.parse(xhr.response)
+        var size = files.table[0].size
+        size2 = size
+        console.log(size)
+        console.log(files.table)
+        await loadRadios(size)
+        //await createMatrix(size)
+    };
+};
+buttonGreek.onclick = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://localhost:3000/public/greek');
+    xhr.send();
 
-function loadImage2(i, imgArray){
-    document.getElementById("mainImage").src = imgArray[i].src;
-}*/
+    xhr.onload = async function() {
+        files = await JSON.parse(xhr.response)
+        console.log(files)
+        var size = files.table[0].size
+        size2 = size
+        console.log(size)
+        console.log(files.table)
+        await loadRadios(size)
+        //await createMatrix(size)
+    };
+};
+buttonSideboard.onclick = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://localhost:3000/public/sideboard');
+    xhr.send();
 
-/*var total = imgArray.length;
-var n = Math.sqrt(total);
-        //var radioArray = new Array();
-var container = document.getElementById('container');
+    xhr.onload = async function() {
+        files = await JSON.parse(xhr.response)
+        var size = files.table[0].size
+        size2 = size
+        console.log(size)
+        console.log(files.table)
+        await loadRadios(size)
+        //await createMatrix(size)
+    };
+};
+buttonTarot.onclick = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://localhost:3000/public/tarot');
+    xhr.send();
 
-for(var i = 0; i< total; i++){
-    var radiobox = document.createElement('input');
-    radiobox.type = 'radio';
-    radiobox.name = "myRadio";
-            //radiobox.id = 'myRadio';
-    radiobox.value = i;
-            //radiobox.onchange = getImage(radiobox);
-    if(i != 0 && i%n == 0){
-        var newline = document.createElement('br');
-        container.appendChild(newline);
-    }
-    container.appendChild(radiobox);
-            //radiobox.onchange = "getImage()"
-            //radioArray.push(radiobox);        
-}
-
-var radios = document.querySelectorAll('input[type=radio][name="myRadio"]');
-
-function changeHandler(event) {
-    console.log(this.value);
-    loadImage2(this.value, imgArray)            
-}
-
-Array.prototype.forEach.call(radios, function(radio) {
-    radio.addEventListener('change', changeHandler);
-});*/
-
-/*const Http = new XMLHttpRequest();
-const url='/';
-Http.open("POST", url);
-Http.send();
-var file = Http.response;
-Http.onreadystatechange = (e) => {
-  console.log(file)
-}*/
-
-
-//var exampleModule = require('./index');
-//var value = exampleModule.exportedVar;
-//console.log(i);
+    xhr.onload = async function() {
+        files = await JSON.parse(xhr.response)
+        var size = files.table[0].size
+        size2 = size
+        console.log(size)
+        console.log(files.table)
+        await loadRadios(size)
+        //await createMatrix(size)
+    };
+};
 
 
 
 let xhr = new XMLHttpRequest();
 xhr.open('get', 'http://localhost:3000/public');
 xhr.send();
-var files;
 
 xhr.onload = async function() {
-    //console.log(xhr.response);
     files = JSON.parse(xhr.response)
     var size = files.table[0].size
+    size2 = size
+    console.log(size)
+    console.log(files.table)
     await loadRadios(size)
-
-    //var radios = document.querySelectorAll('input[type=radio][name="myRadio"]');
-
-    //var files2 = JSON.parse(files);
-    //console.log(files.table[2].filename);
-    
+    //await createMatrix(size)
 };
+var imgMatrix = []
+var s
+var t
+async function createMatrix(size){
+    var tempSize = size-1
+   // var imgMatrix = []
+    var img = []
+    var j = 0;
+    for(var i =0; i< tempSize; i++){
+        if(i % Math.sqrt(tempSize) == 0 && i != 0){
+            console.log(j)
+            //imgMatrix[j] = []
+            imgMatrix.push(img)
+            console.log(imgMatrix)
+            j++
+            //console.log(i)
+            img = []
+        }
+        img.push(files.table[i+2].filename)
+        //console.log(img[0][1])
+        //imgMatrix[i].push(img)
+        //console.log(imgMatrix[0].length)
+    }
+    console.log("Valor da linha da matriz")
+    console.log(imgMatrix)
 
-async function loadImage2(i){
+}
+
+function loadImage2(i){
     var index = parseInt(i) + 2
     console.log(index)
     console.log(files.table[index])
     document.getElementById("mainImage").src = files.table[index].filename;
+
+    /*for(var i = 0; i < imgMatrix.length; i++ ){
+        for(var j = 0; j< imgMatrix[0].length; j++){
+            if(imgMatrix[i][j] == files.table[index].filename){
+                s = i
+                t = j
+                console.log(s)
+                console.log(t)
+                break;
+            }
+        }
+    }*/
 }
 
-async function loadRadios(size, files){
-    var n = Math.sqrt(size-1)
-    //console.log(n)
-    for(var i = 0; i< size-1; i++){
+document.addEventListener('keydown', (event) => {
+    if (event.defaultPrevented) {
+        return;
+      }
+    if(event.code === "ArrowDown" || event.code === "ArrowUp" || event.code === "ArrowRight" || event.code === "ArrowLeft"){
+        tentandoMudarEsseInferno(event.code)
+    }
+    event.preventDefault();
+  }, true);
+
+
+function tentandoMudarEsseInferno(code){
+    var radios = document.querySelectorAll('input[type=radio][name="myRadio"]');
+    let selectedSize;
+    var hascheck = false
+    var n = Math.sqrt(size2)
+    for (const radioButton of radios) {
+        if (radioButton.checked) {
+            selectedSize = radioButton.value;
+            radioButton.checked = false;
+            hascheck = true
+            break;
+        }
+    }
+    if(hascheck){
+        var n = Math.sqrt(size2)
+        if(code === "ArrowDown"){
+            radios[parseInt(selectedSize)+n].checked = true
+            loadImage2(parseInt(selectedSize))
+        }else if(code === "ArrowUp"){
+            radios[parseInt(selectedSize)-n].checked = true
+            loadImage2(parseInt(selectedSize))
+        }else if(code === "ArrowRight"){
+            radios[parseInt(selectedSize)+1].checked = true
+            loadImage2(parseInt(selectedSize))
+        }else if(code === "ArrowLeft"){
+            radios[parseInt(selectedSize)-1].checked = true
+            loadImage2(parseInt(selectedSize))
+        }
+    }
+}
+
+async function loadRadios(size){
+    var n = Math.sqrt(size)
+    console.log(n)
+    for(var i = 0; i< size; i++){
         var radiobox = document.createElement('input');
         radiobox.type = 'radio';
         radiobox.name = "myRadio";
@@ -145,13 +194,11 @@ async function loadRadios(size, files){
 
 function changeHandler(event) {
     console.log(this.value);
-  //  console.log(files);
     loadImage2(this.value)            
 }
 
-var imgok = new Image();
+/*var imgok = new Image();
 imgok.src = document.getElementById("mainImage").src
-//const img = document.getElementById("mainImage"); 
 const canvas = document.createElement('canvas'); 
 const ctx = canvas.getContext('2d'); 
  
@@ -168,11 +215,31 @@ const imgData = ctx.getImageData(
 console.log(imgData.length);
 
 var matrizPixels = []
+var j = 0
 for(var i = 0; i< imgData.length-3; i=i+4){
-    var pixel = []
-    pixel.push([imgData[i], imgData[i+1], imgData[i+2], imgData[i+3]])
-    //console.log(pixel)
-    matrizPixels.push(pixel)
+    var pixel = [imgData[i], imgData[i+1], imgData[i+2], imgData[i+3]]
+    
+    matrizPixels[j] = []
+    matrizPixels[j].push(pixel)
 }
-console.log(matrizPixels[0])
+console.log(matrizPixels[0][0])
+*/
 
+/*function refocus(){
+    var Srefocus = s - 0.4
+    var Trefocus = t - 0.4
+    var sumS = 0;
+    var sumT = 0;
+    var disp = 0.3
+    for(var i = 0; i< imgMatrix.length; i++){
+        sumS = sumS + (i - Srefocus)
+    }
+    for(var j = 0; j< imgMatrix[0].length; j++){
+        sumT = sumT + (j - Trefocus)
+    }
+    var valueS = sumS*disp
+    var valueT = sumT*disp
+    for(var i = 0; i< imgData.length; i++){
+        imgData
+    }
+}*/
