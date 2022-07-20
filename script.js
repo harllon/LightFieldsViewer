@@ -88,23 +88,17 @@ var s
 var t
 async function createMatrix(size){
     var tempSize = size-1
-   // var imgMatrix = []
     var img = []
     var j = 0;
     for(var i =0; i< tempSize; i++){
         if(i % Math.sqrt(tempSize) == 0 && i != 0){
             console.log(j)
-            //imgMatrix[j] = []
             imgMatrix.push(img)
             console.log(imgMatrix)
             j++
-            //console.log(i)
             img = []
         }
         img.push(files.table[i+2].filename)
-        //console.log(img[0][1])
-        //imgMatrix[i].push(img)
-        //console.log(imgMatrix[0].length)
     }
     console.log("Valor da linha da matriz")
     console.log(imgMatrix)
@@ -158,16 +152,16 @@ function tentandoMudarEsseInferno(code){
         var n = Math.sqrt(size2)
         if(code === "ArrowDown"){
             radios[parseInt(selectedSize)+n].checked = true
-            loadImage2(parseInt(selectedSize))
+            loadImage2(parseInt(selectedSize)+n)
         }else if(code === "ArrowUp"){
             radios[parseInt(selectedSize)-n].checked = true
-            loadImage2(parseInt(selectedSize))
+            loadImage2(parseInt(selectedSize)-n)
         }else if(code === "ArrowRight"){
             radios[parseInt(selectedSize)+1].checked = true
-            loadImage2(parseInt(selectedSize))
+            loadImage2(parseInt(selectedSize)+1)
         }else if(code === "ArrowLeft"){
             radios[parseInt(selectedSize)-1].checked = true
-            loadImage2(parseInt(selectedSize))
+            loadImage2(parseInt(selectedSize)-1)
         }
     }
 }
