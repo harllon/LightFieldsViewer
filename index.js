@@ -1,7 +1,8 @@
 var express = require('express');
 const path = require('path');
-const testFolder = './public/greek';
+const testFolder = './public/tarot';
 const fs = require('fs');
+const { STATUS_CODES } = require('http');
 var app = express();
 
 var PORT = 3000;
@@ -26,17 +27,23 @@ data.table = []
 var i = 0;
 //var imgArray = new Array();
 fs.readdir(testFolder, (err, files) => {
-  var obj2 = {size: files.length}
+  var obj2
+  if(files[0] == ".DS_Store"){
+    obj2 = {size: files.length-1}
+  }else{
+    obj2 = {size: files.length}
+  }
   data.table.push(obj2)
   files.forEach(file => {
-    console.log(file);
-    var obj = {
-      id: i,
-      filename: testFolder + "/" + file
+    if(file != ".DS_Store"){
+      console.log(file);
+      var obj = {
+        id: i,
+        filename: testFolder + "/" + file
+      }
+      data.table.push(obj)
+      i++;
     }
-    //imgArray[i] = file;
-    data.table.push(obj)
-    i++;
   });
 });
 
