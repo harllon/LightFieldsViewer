@@ -1,147 +1,35 @@
-var buttonGreek = document.getElementById("greek")
-var buttonSideboard = document.getElementById("sideboard")
-var buttonBike = document.getElementById("bike")
-var buttonTarot = document.getElementById("tarot")
 
-var files;
-var size2;
-
-buttonBike.onclick = function(){
-    let xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/public/bikes');
-    xhr.send();
-
-    xhr.onload = async function() {
-        files = await JSON.parse(xhr.response)
-        var size = files.table[0].size
-        size2 = size
-        console.log(size)
-        console.log(files.table)
-        await loadRadios(size)
-        //await createMatrix(size)
-    };
-};
-buttonGreek.onclick = function(){
-    let xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/public/greek');
-    xhr.send();
-
-    xhr.onload = async function() {
-        files = await JSON.parse(xhr.response)
-        console.log(files)
-        var size = files.table[0].size
-        size2 = size
-        console.log(size)
-        console.log(files.table)
-        await loadRadios(size)
-        //await createMatrix(size)
-    };
-};
-buttonSideboard.onclick = function(){
-    let xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/public/sideboard');
-    xhr.send();
-
-    xhr.onload = async function() {
-        files = await JSON.parse(xhr.response)
-        var size = files.table[0].size
-        size2 = size
-        console.log(size)
-        console.log(files.table)
-        await loadRadios(size)
-        //await createMatrix(size)
-    };
-};
-buttonTarot.onclick = function(){
-    let xhr = new XMLHttpRequest();
-    xhr.open('get', 'http://localhost:3000/public/tarot');
-    xhr.send();
-
-    xhr.onload = async function() {
-        files = await JSON.parse(xhr.response)
-        var size = files.table[0].size
-        size2 = size
-        console.log(size)
-        console.log(files.table)
-        await loadRadios(size)
-        //await createMatrix(size)
-    };
-};
-
-
-
+//REQUEST HTTP
 let xhr = new XMLHttpRequest();
 xhr.open('get', 'http://localhost:3000/public');
 xhr.send();
 
-xhr.onload = async function() {
+xhr.onload = function() {
     files = JSON.parse(xhr.response)
     var size = files.table[0].size
     size2 = size
-    console.log(size)
-    console.log(files.table)
-    await loadRadios(size)
-    //await createMatrix(size)
+    loadRadios(size)
 };
-var imgMatrix = []
-var s
-var t
-async function createMatrix(size){
-    var tempSize = size-1
-   // var imgMatrix = []
-    var img = []
-    var j = 0;
-    for(var i =0; i< tempSize; i++){
-        if(i % Math.sqrt(tempSize) == 0 && i != 0){
-            console.log(j)
-            //imgMatrix[j] = []
-            imgMatrix.push(img)
-            console.log(imgMatrix)
-            j++
-            //console.log(i)
-            img = []
-        }
-        img.push(files.table[i+2].filename)
-        //console.log(img[0][1])
-        //imgMatrix[i].push(img)
-        //console.log(imgMatrix[0].length)
-    }
-    console.log("Valor da linha da matriz")
-    console.log(imgMatrix)
 
-}
-
-function loadImage2(i){
+//LOAD IMAGES WHEN USING MATRIX
+function loadImage(i){
     var index = parseInt(i) + 2
-    console.log(index)
-    console.log(files.table[index])
     document.getElementById("mainImage").src = files.table[index].filename;
-
-    /*for(var i = 0; i < imgMatrix.length; i++ ){
-        for(var j = 0; j< imgMatrix[0].length; j++){
-            if(imgMatrix[i][j] == files.table[index].filename){
-                s = i
-                t = j
-                console.log(s)
-                console.log(t)
-                break;
-            }
-        }
-    }*/
 }
 
+//CHANGE THE DEFAULT BEHAVIOUR OF ARROW KEY WHEN USING THE RADIOBOX
 document.addEventListener('keydown', (event) => {
     if (event.defaultPrevented) {
         return;
       }
     if(event.code === "ArrowDown" || event.code === "ArrowUp" || event.code === "ArrowRight" || event.code === "ArrowLeft"){
-        tentandoMudarEsseInferno(event.code)
+        newArrowMove(event.code)
     }
     event.preventDefault();
   }, true);
 
 
-function tentandoMudarEsseInferno(code){
+function newArrowMove(code){
     var radios = document.querySelectorAll('input[type=radio][name="myRadio"]');
     let selectedSize;
     var hascheck = false
@@ -158,23 +46,23 @@ function tentandoMudarEsseInferno(code){
         var n = Math.sqrt(size2)
         if(code === "ArrowDown"){
             radios[parseInt(selectedSize)+n].checked = true
-            loadImage2(parseInt(selectedSize))
+            loadImage(parseInt(selectedSize))
         }else if(code === "ArrowUp"){
             radios[parseInt(selectedSize)-n].checked = true
-            loadImage2(parseInt(selectedSize))
+            loadImage(parseInt(selectedSize))
         }else if(code === "ArrowRight"){
             radios[parseInt(selectedSize)+1].checked = true
-            loadImage2(parseInt(selectedSize))
+            loadImage(parseInt(selectedSize))
         }else if(code === "ArrowLeft"){
             radios[parseInt(selectedSize)-1].checked = true
-            loadImage2(parseInt(selectedSize))
+            loadImage(parseInt(selectedSize))
         }
     }
 }
 
-async function loadRadios(size){
+//CREATE THE MATRIX OF RADIOS BUTTONS
+function loadRadios(size){
     var n = Math.sqrt(size)
-    console.log(n)
     for(var i = 0; i< size; i++){
         var radiobox = document.createElement('input');
         radiobox.type = 'radio';
@@ -191,11 +79,16 @@ async function loadRadios(size){
         radio.addEventListener('change', changeHandler);
     });
 }
-
+//CHANGE THE IMAGE
 function changeHandler(event) {
-    console.log(this.value);
-    loadImage2(this.value)            
+    loadImage(this.value)            
 }
+
+
+
+
+
+//REFOCUS
 
 /*var imgok = new Image();
 imgok.src = document.getElementById("mainImage").src
@@ -243,3 +136,44 @@ console.log(matrizPixels[0][0])
         imgData
     }
 }*/
+
+/*var imgMatrix = []
+var s
+var t
+async function createMatrix(size){
+    var tempSize = size-1
+   // var imgMatrix = []
+    var img = []
+    var j = 0;
+    for(var i =0; i< tempSize; i++){
+        if(i % Math.sqrt(tempSize) == 0 && i != 0){
+            console.log(j)
+            //imgMatrix[j] = []
+            imgMatrix.push(img)
+            console.log(imgMatrix)
+            j++
+            //console.log(i)
+            img = []
+        }
+        img.push(files.table[i+2].filename)
+        //console.log(img[0][1])
+        //imgMatrix[i].push(img)
+        //console.log(imgMatrix[0].length)
+    }
+    console.log("Valor da linha da matriz")
+    console.log(imgMatrix)
+
+}*/
+
+//REFOCUS DENTRO DO LOADIMAGE
+    /*for(var i = 0; i < imgMatrix.length; i++ ){
+        for(var j = 0; j< imgMatrix[0].length; j++){
+            if(imgMatrix[i][j] == files.table[index].filename){
+                s = i
+                t = j
+                console.log(s)
+                console.log(t)
+                break;
+            }
+        }
+    }*/
