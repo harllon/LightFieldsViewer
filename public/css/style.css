@@ -1,57 +1,188 @@
-* {
-    margin: (0,0,1);
-    padding: (0,0,1);
+html, body {
+  background-color: #0593da;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: medium;
+  color: white;
+  height: 100%;
 }
 
+h2 {
+  margin-left: 20px;
+}
+
+header {
+  background: linear-gradient(180deg, rgba(36,78,160,1) 0%, rgba(36,78,160,1) 85%, rgba(5,147,218,1) 100%);
+  padding: 5px;
+}
+.header-image {
+    background-image: url("/public/assets/logo_ime.png");
+    width: 75px;
+    height: 90px;
+    background-size: contain;
+    top: 3px;
+    float: left;
+}
+.header-text {
+    font-size: large;
+    position: relative;
+}
+
+footer {
+  text-align: right;
+  padding: 5px;
+  background: linear-gradient(0deg, rgba(36,78,160,1) 0%, rgba(36,78,160,1) 85%, rgba(5,147,218,1) 100%);
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column {
+  float: left;
+  padding: 10px;
+}
+.column.side {
+  width: 20%;
+}
+.column.middle {
+  width: 60%;
+}
+
+@media screen and (max-width: 600px) {
+  .column.side, .column.middle {
+    width: 100%;
+  }
+}
+
+/* ----------- QUADRO CENTRAL DA IMAGEM -------------- */
+#container {
+  margin: 32px auto;
+  width: 1024px;
+}
+.lfv-canvas {
+  background-color: black;
+  position: relative;
+  width: 1024px;
+  height: 768px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+img {
+  width: 1024px;
+  height: 768px;
+  justify-content: center;
+  display: flex;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  object-fit: contain;
+}
+
+/* ----------- BOTÃO DATASETS -------------- */
+button {
+  background-color: #244ea0;
+  font-size: large;
+  color: white;
+  padding: 14px 50px;
+  border-radius: 6px;
+  box-shadow: 0 0 12px black;
+  cursor: pointer;
+  display: block;
+  line-height: 20px;
+  width: 75%;
+  margin: 20px 20px;
+  transition-duration: 0.4s;
+}
+button:hover {
+  background-color: #0593da;
+}
+
+/* ----------- BOTÃO DE AJUDA -------------- */
+.lfv-button {
+  background-color: #c8301e;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 14px;
+  padding: 9px;
+  width: 14px;
+}
+.lfv-controls__button {
+  float: left;
+  margin: 90% 20px;
+}
+.lfv-controls__button-icon {
+  display: block;
+  height: 14px;
+  width: 14px;
+}
+.lfv-controls__button-icon_help > path {
+  fill: none;
+  stroke: white;
+  stroke-width: 2;
+}
+.lfv-controls__button-icon_help > rect {
+  fill: white;
+}
+
+/* ------------ PARA CIMA OK --------------- */
+/* ------------ STAGING AREA --------------- */
+
+.pov-container {
+  background-color: rgb(0, 0, 0);
+  width: 384px; 
+  height: 384px;
+  margin-left: 20px;
+}
+
+.fpc-container {
+  background-color: rgb(0, 0, 0);
+  width: 384px; 
+  height: 80px;
+  margin-left: 20px;
+}
+
+/* ------------ STAGING AREA --------------- */
+/* ------------- A ANALISAR --------------- */
+.lfv-canvas__display-container {
+  margin: 0 auto;
+  position: relative;
+  width: 400px; 
+  height: 480px; 
+  margin-top: 0px;
+}
+.lfv-canvas__display {
+  vertical-align: bottom;
+  width: 480px;
+  height: 480px;
+}
 .wrapper {
-    margin: 0 auto;
-    width: 1000px;
+  margin: 0 auto;
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position-x: center; 
+  background-position-y: center;
+  align-self: center;
 }
 
-.img-tapi {
-    width: 848px;
-    height: 480px;
-    background-image: url(assets/chess.jpg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position-x: center;
-    align-self: center;
+#controls { 
+  color: rgb(16, 245, 62);
+  font-size: 14px;
+  margin: 24px 0;
 }
 
-.header .image {
-    background: url(assets/logo_ime.png) 
-                no-repeat;
-    width: 50px;
-    height: 60px;
-    background-size: contain;
+.link {
+  color: inherit;
+  line-height: 36px;
+  float: right;
+  margin: 0 16px;
 }
 
-.header .text {
-    font: x-large sans-serif;
-    font-size: 40px;
-    color: #fff;
-}
-
-.header .image, 
-.header .text {
-    display: inline-block;
-    vertical-align: bottom;
-}
-
-/**
- *	Bootstrap
- */
 /**
  *	Button
  */
- .lfv-button {
-    background-color: #c8301e;
-    border-radius: 50%;
-    cursor: pointer;
-    height: 14px;
-    padding: 9px;
-    width: 14px;
-  }
+
   .lfv-button_disabled {
     background-color: #4f5157;
     cursor: default;
@@ -60,58 +191,9 @@
   .lfv-button_active {
     background-color: #ff1900;
   }
-  /**
-   *	Display canvas
-   */
-  .lfv-canvas {
-    background-color: #244ea0;
-    position: relative;
-  }
-  .lfv-canvas__display-container {
-    margin: 0 auto;
-    position: relative;
-  }
-  .lfv-canvas__display {
-    vertical-align: bottom;
-  }
-  .lfv-canvas__error {
-    color: #e4e4e4;
-    line-height: 32px;
-    margin-top: -32px;
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    width: 100%;
-  }
-  .lfv-canvas__error-icon {
-    height: 32px;
-    margin-right: 16px;
-    vertical-align: middle;
-    width: 32px;
-  }
-  .lfv-canvas__error-icon > circle:first-child,
-  .lfv-canvas__error-icon > path {
-    fill: none;
-    stroke: #db3c3c;
-    stroke-width: 2;
-  }
-  .lfv-canvas__error-icon > circle {
-    fill: #db3c3c;
-  }
-  .lfv-canvas__error-note {
-    font-size: 12px;
-  }
-  /**
-   *	Parent container
-   */
-  .lfv-container {
-    background-color: #141417;
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 16px;
-  }
-  /**
-   *	Bottom control bar
-   */
+  
+  
+  /* ------------------------ BARRA DE CONTROLES (SLIDERS) ------------------------ */
   .lfv-controls {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -120,6 +202,7 @@
   }
   .lfv-controls__row {
     height: 80px;
+    width: 848px;
     margin: 0 auto;
     overflow: hidden;
   }
@@ -143,41 +226,10 @@
   .lfv-controls__icon_focus {
     fill: #4f5751;
   }
-  .lfv-controls__icon_aperture > circle {
-    fill: #4f5157;
-  }
-  .lfv-controls__icon_aperture > path {
-    fill: #141417;
-  }
-  .lfv-controls__icon_aperture > line {
-    stroke: #141417;
-    stroke-width: 1.05;
-  }
   .lfv-controls .lfv-slider {
     float: left;
   }
-  .lfv-controls__button {
-    float: left;
-    margin: 24px 8px;
-  }
-  .lfv-controls__button-icon {
-    display: block;
-    height: 14px;
-    width: 14px;
-  }
-  .lfv-controls__button-icon_screen > path {
-    fill: none;
-    stroke: #141417;
-    stroke-width: 2;
-  }
-  .lfv-controls__button-icon_help > path {
-    fill: none;
-    stroke: #141417;
-    stroke-width: 2;
-  }
-  .lfv-controls__button-icon_help > rect {
-    fill: #141417;
-  }
+ 
   /**
    *	Help window
    */
@@ -223,42 +275,7 @@
     font-size: 16px;
     padding-right: 28px;
   }
-  /**
-   *	Refocus click indicator
-   */
-  .lfv-focus-marker {
-    display: block;
-    height: 64px;
-    pointer-events: none;
-    position: absolute;
-    width: 64px;
-  }
-  .lfv-focus-marker_hidden {
-    display: none;
-  }
-  /**
-   *	Loading indicator
-   */
-  .lfv-loader {
-    left: 50%;
-    margin: -64px 0 0 -64px;
-    position: absolute;
-    top: 50%;
-  }
-  .lfv-loader__canvas {
-    height: 128px;
-    width: 128px;
-  }
-  .lfv-loader__text {
-    color: #e4e4e4;
-    font-size: 18px;
-    left: 0;
-    line-height: 128px;
-    position: absolute;
-    text-align: center;
-    top: 0;
-    width: 128px;
-  }
+
   /**
    *	Horizontal slider
    */
@@ -270,6 +287,7 @@
     border-radius: 3px;
     display: inline-block;
     height: 6px;
+    width: 216px;
     margin-top: 10px;
     position: relative;
   }
@@ -293,4 +311,24 @@
   .lfv-slider_active .lfv-slider__handle {
     border-color: #ff1900;
   }
+
+    /* ---------------- INDICADOR DO CLIQUE NO REFOCUS, AINDA NÃO IMPLEMENTADO ---------------- */
+    /* ------------------------- vai precisar estar na própria imagem ------------------------- */
+
+    .lfv-focus-marker {
+      display: block;
+      width: 64px;
+      height: 64px;
+      left: -32px;
+      top: -32px;
+      pointer-events: none;
+      position: absolute;
+    }
+    .lfv-focus-marker_hidden {
+      display: none;
+      width: 64px;
+      height: 64px;
+      left: -32px;
+      top: -32px;
+    }
   
