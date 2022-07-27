@@ -61,18 +61,6 @@ buttonTarot.onclick = function(){
     };
 };
 
-
-let xhr = new XMLHttpRequest();
-xhr.open('get', 'http://localhost:3000/public');
-xhr.send();
-
-xhr.onload = function() {
-    files = JSON.parse(xhr.response)
-    var size = files.table[0].size
-    size2 = size
-    loadRadios(size)
-};
-
 //LOAD IMAGES WHEN USING MATRIX
 function loadImage(i){
     var index = parseInt(i) + 2
@@ -126,8 +114,9 @@ function newArrowMove(code){
 var firstTime = true;
 function loadRadios(size){
     if(!firstTime){
+        var parent = document.getElementById("pov").parentNode;
         var boxArea = document.getElementById("matrixPlace")
-        document.body.removeChild(boxArea)
+        parent.removeChild(boxArea)
     }
     var n = Math.sqrt(size)
     var box = document.createElement('div');
@@ -143,7 +132,9 @@ function loadRadios(size){
         }
         box.appendChild(radiobox);       
     }
-    document.body.appendChild(box)
+    var parent = document.getElementById("pov").parentNode;
+    var original = document.getElementById("pov")
+    parent.insertBefore(box, original)
     var radios = document.querySelectorAll('input[type=radio][name="myRadio"]');
     Array.prototype.forEach.call(radios, function(radio) {
         radio.addEventListener('change', changeHandler);
