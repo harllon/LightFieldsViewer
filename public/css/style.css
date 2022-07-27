@@ -129,7 +129,7 @@ button:hover {
 /* ------------ PARA CIMA OK --------------- */
 /* ------------ STAGING AREA --------------- */
 
-.pov-container {
+#povContainer {
   background-color: rgb(0, 0, 0);
   width: 384px; 
   height: 384px;
