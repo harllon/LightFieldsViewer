@@ -1,6 +1,6 @@
 var express = require('express');
 const path = require('path');
-const testFolder = './public/sideboard';
+var folder = "";
 const fs = require('fs');
 var app = express();
 
@@ -18,22 +18,61 @@ app.listen(PORT, function() {
     console.log('Server is running on PORT:',PORT);
 });
 
-var data = {}
-data.table = []
-var i = 0;
-fs.readdir(testFolder, (err, files) => {
-  var obj2 = {size: files.length}
+//create the object with file names and size to be passed as json
+function createObject(files, folder){
+  var data = {}
+  data.table = []
+  var i = 0;
+  var obj2
+  if(files[0] == ".DS_Store"){
+    obj2 = {size: files.length-1}
+  }else{
+    obj2 = {size: files.length}
+  }
   data.table.push(obj2)
   files.forEach(file => {
-    var obj = {
-      id: i,
-      filename: testFolder + "/" + file
+    if(file != ".DS_Store"){
+      console.log(file);
+      var obj = {
+        id: i,
+        filename: folder + "/" + file
+      }
+      data.table.push(obj)
+      i++;
     }
-    data.table.push(obj)
-    i++;
   });
+  return data;
+}
+
+//reponse of http requests and routes
+app.get('/public/greek', async (req, res) => {
+  folder = './public/greek';
+  var files = await readdir(folder);
+  var data = createObject(files, folder);
+  console.log(data);
+  res.json(data);
 });
 
-app.get('/public', (req, res) => {
+app.get('/public/tarot', async (req, res) => {
+  folder = './public/tarot'
+  var files = await readdir(folder);
+  var data = createObject(files, folder);
+  console.log(data);
+  res.json(data);
+});
+
+app.get('/public/bikes', async (req, res) => {
+  folder = './public/bikes'
+  var files = await readdir(folder);
+  var data = createObject(files, folder);
+  console.log(data);
+  res.json(data);
+});
+
+app.get('/public/sideboard', async (req, res) => {
+  folder = './public/sideboard'
+  var files = await readdir(folder);
+  var data = createObject(files, folder);
+  console.log(data);
   res.json(data);
 });
