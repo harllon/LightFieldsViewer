@@ -1,6 +1,6 @@
 var express = require('express');
 const path = require('path');
-const testFolder = './public/tarot';
+const testFolder = './public/sideboard';
 const fs = require('fs');
 var app = express();
 
