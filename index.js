@@ -3,6 +3,8 @@ const path = require('path');
 var folder = "";
 const fs = require('fs');
 var app = express();
+const util = require('util');
+const readdir = util.promisify(fs.readdir);
 
 var PORT = 3000;
 
