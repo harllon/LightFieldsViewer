@@ -341,6 +341,59 @@
   .lfv-slider_active .lfv-slider__handle {
     border-color: #ff1900;
   }
+    /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content/Box */
+  .modal-body {padding: 2px 16px;}
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+
+  /* Add Animation */
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
     </style>
 </head>
 <body class="vsc-initialized">
@@ -435,6 +488,21 @@
                             <button type="button" id="bike">Bike</button>
                             <button type="button" id="sideboard">SideBoard</button>
                             <button type="button" id="tarot">Tarot</button>
+                            <div id="myModal" class="modal">
+                              <!-- Modal content -->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <span class="close">&times;</span>
+                                  <h2>Hello There, let me guide you to the better experience using our image viewer!</h2>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Click on the button of the desired dataset to load it and visualize!</p>
+                                  <p>You can change the point of view moving along the point matrix. You need to choose the dataset first to be able to see the matrix!</p>
+                                  <p>You can use the slider to change the focus of the image selected. don't be shy, you can play as much as you want!</p>
+                                  <p>Don't be shy, you can play as much as you want! </p>
+                                </div>
+                              </div>
+                            </div>
                         </div>
                     </div>
                 </div>            
