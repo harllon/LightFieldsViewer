@@ -112,7 +112,7 @@
    *	Display canvas
    */
   .lfv-canvas {
-    background-color: #244ea0;
+    background-color: #000000;
     position: relative;
   }
   .lfv-canvas__display-container {
@@ -393,6 +393,29 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+    
+  img {
+    width: 848px;
+    height: 480px;
+  
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+  }
+  .fill {
+    object-fit: fill;
+  }
+
+  .contain {
+    object-fit: contain;
+  }
+
+  .cover {
+    object-fit: cover;
+  }
+
+  .scale-down {
+    object-fit: scale-down;
   }
     </style>
 </head>
@@ -409,7 +432,7 @@
             <div class="lfv-container" style="width: 848px; height: 560px;" data-reactid=".0">
                 <div class="lfv-canvas" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 848px; height: 480px;" data-reactid=".0.0">
                     <div class="wrapper">         
-                        <img src="public/assets/chess.jpg" id="mainImage" style="width: 848px; height: 480px; background-size: contain; background-repeat: no-repeat; background-position-x: center; align-self: center;">
+                        <img src="public/assets/chess.jpg" id="mainImage" class="contain">
                     </div>
                     <div class="lfv-canvas__display-container" style="width: 480px; height: 480px; margin-top: 0px;" data-reactid=".0.0.2">
                         <canvas class="lfv-focus-marker lfv-focus-marker_hidden" width="64" height="64" style="left:-32px;top:-32px;" data-reactid=".0.0.2.0">
@@ -486,8 +509,8 @@
                             </div>
                             <button type="button" id="greek">Greek</button>
                             <button type="button" id="bike">Bike</button>
-                            <button type="button" id="sideboard">SideBoard</button>
                             <button type="button" id="tarot">Tarot</button>
+                            <button type="button" id="sideboard">SideBoard</button>
                             <div id="myModal" class="modal">
                               <!-- Modal content -->
                               <div class="modal-content">

@@ -1,5 +1,67 @@
 
 //REQUEST HTTP
+
+var buttonGreek = document.getElementById("greek")
+var buttonSideboard = document.getElementById("sideboard")
+var buttonBike = document.getElementById("bike")
+var buttonTarot = document.getElementById("tarot")
+
+var files;
+var size2;
+
+buttonGreek.onclick = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://localhost:3000/public/greek');
+    xhr.send();
+
+    xhr.onload = function() {
+        files = JSON.parse(xhr.response)
+        var size = files.table[0].size
+        size2 = size
+        loadRadios(size)
+    };
+};
+
+buttonSideboard.onclick = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://localhost:3000/public/sideboard');
+    xhr.send();
+
+    xhr.onload = function() {
+        files = JSON.parse(xhr.response)
+        var size = files.table[0].size
+        size2 = size
+        loadRadios(size)
+    };
+};
+
+buttonBike.onclick = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://localhost:3000/public/bikes');
+    xhr.send();
+
+    xhr.onload = function() {
+        files = JSON.parse(xhr.response)
+        var size = files.table[0].size
+        size2 = size
+        loadRadios(size)
+    };
+};
+
+buttonTarot.onclick = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://localhost:3000/public/tarot');
+    xhr.send();
+
+    xhr.onload = function() {
+        files = JSON.parse(xhr.response)
+        var size = files.table[0].size
+        size2 = size
+        loadRadios(size)
+    };
+};
+
+
 let xhr = new XMLHttpRequest();
 xhr.open('get', 'http://localhost:3000/public');
 xhr.send();
@@ -61,8 +123,15 @@ function newArrowMove(code){
 }
 
 //CREATE THE MATRIX OF RADIOS BUTTONS
+var firstTime = true;
 function loadRadios(size){
+    if(!firstTime){
+        var boxArea = document.getElementById("matrixPlace")
+        document.body.removeChild(boxArea)
+    }
     var n = Math.sqrt(size)
+    var box = document.createElement('div');
+    box.id = "matrixPlace"
     for(var i = 0; i< size; i++){
         var radiobox = document.createElement('input');
         radiobox.type = 'radio';
@@ -70,15 +139,18 @@ function loadRadios(size){
         radiobox.value = i;
         if(i != 0 && i%n == 0){
             var newline = document.createElement('br');
-            container.appendChild(newline);
+            box.appendChild(newline);
         }
-        container.appendChild(radiobox);       
+        box.appendChild(radiobox);       
     }
+    document.body.appendChild(box)
     var radios = document.querySelectorAll('input[type=radio][name="myRadio"]');
     Array.prototype.forEach.call(radios, function(radio) {
         radio.addEventListener('change', changeHandler);
     });
+    firstTime = false;
 }
+
 //CHANGE THE IMAGE
 function changeHandler(event) {
     loadImage(this.value)            
