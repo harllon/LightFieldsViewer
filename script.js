@@ -135,6 +135,14 @@ function loadRadios(size){
     var parent = document.getElementById("pov").parentNode;
     var original = document.getElementById("pov")
     parent.insertBefore(box, original)
+    var containing = document.getElementById("povContainer");
+    var dimensionW = n*21;
+    var dimensionH = n*(19.5);
+
+    containing.style.width = dimensionW.toString() + "px";
+    containing.style.height = dimensionH.toString() + "px";
+    //containing.style.width = "190px";
+    //containing.style.height = "180px";
     var radios = document.querySelectorAll('input[type=radio][name="myRadio"]');
     Array.prototype.forEach.call(radios, function(radio) {
         radio.addEventListener('change', changeHandler);
