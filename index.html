@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="public/assets/vision.png" />
-    <title>Visualizador Light Field</title>
+    <title> Light Field Viewer </title>
     <link rel="stylesheet" href="public/css/style.css">
     <!-- script js --> 
 </head>
@@ -14,15 +14,11 @@
   <header>
     <div class="header-image"></div>
     <div class="header-text">
-      <h1 style="margin-left: 90px;"> Visualizador de Light Fields </h1>
-      <p style="color: rgba(255, 255, 255, 0.5); text-align: right;">
-        Layout v2.0
-      </p>
+      <h1 style="margin-left: 9vmin;"> Light Field Viewer </h1>
     </div>
   </header>
 
   <div id="myModal" class="modal">
-    <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
         <span class="close">&times;</span>
@@ -31,7 +27,7 @@
       <div class="modal-body">
         <p>Click on the button of the desired dataset to load it and visualize!</p>
         <p>You can change the point of view moving along the point matrix. You need to choose the dataset first to be able to see the matrix!</p>
-        <p>You can use the slider to change the focus of the image selected. don't be shy, you can play as much as you want!</p>
+        <p>You can use the slider to change the focus of the image selected.</p>
         <p>Don't be shy, you can play as much as you want! </p>
       </div>
     </div>
@@ -45,16 +41,8 @@
       <button id="sideboard">SideBoard</button>
       <button id="tarot">Tarot</button>
       
-      <div class="lfv-controls__button" data-reactid=".0.1.0.3"> <!--botão de ajuda (?)-->
-        <div class="lfv-button  undefined" id="help" title="Help" data-reactid=".0.1.0.3.0">
-            <svg class="lfv-controls__button-icon lfv-controls__button-icon_help" data-reactid=".0.1.0.3.0.0">
-                <path d="M4,4 c0,0 0,-3 3,-3 c2,0 3,2 3,3 c0,2 -3,3 -3,4 l0,2" data-reactid=".0.1.0.3.0.0.0"></path>
-                <rect x="6" y="12" width="2" height="2" data-reactid=".0.1.0.3.0.0.1"></rect>
-            </svg>
-        </div>
-      </div>
-      <p style="margin-top: 91%; display: inline-block;">Precisa de ajuda?</p>
-    </div>
+      <button class="help-button" id="help" title="Help"> ? </button>
+    </div> 
 
     <div class="column middle" id="container">
       <div class="lfv-canvas">      
@@ -63,38 +51,36 @@
     </div>
 
     <div class="column side">
-      <h2>Mudança do Plano Focal</h2>
+      <h2> Set Focal Plane </h2>
       <div class="fpc-container">
-        <div class="lfv-controls" data-reactid=".0.1"><!--slider de plano focal-->
-          <div class="lfv-controls__row" data-reactid=".0.1.0">
-            <div class="lfv-controls__slider" data-reactid=".0.1.0.0"> 
-                <svg class="lfv-controls__icon lfv-controls__icon_focus" data-reactid=".0.1.0.0.0">
-                    <path d="M14,22 l0,-8 c0,0,6,-3,6,-6 c0,-3,-2,-6,-2,-6 l-2,4 l-3,-4 l-3,4 l-2,-4 c0,0,-2,3,-2,6 c0,3,6,6,6,6 l0,8 l-10,-8 c0,0,0,10,7,10 l8,0 c7,0,7,-10,7,-10 Z" data-reactid=".0.1.0.0.0.0"></path>
-                </svg>
-                <div class="lfv-slider" data-reactid=".0.1.0.0.1">
-                    <div class="lfv-slider__track" data-reactid=".0.1.0.0.1.0">
-                        <div class="lfv-slider__handle-container" data-reactid=".0.1.0.0.1.0.0">
-                            <div class="lfv-slider__handle" data-reactid=".0.1.0.0.1.0.0.0"></div>
-                        </div>
+        <div class="fpc-controls">
+            <svg class="fpc-figure" id="flor">
+                <path d="M14,22 l0,-8 c0,0,6,-3,6,-6 c0,-3,-2,-6,-2,-6 l-2,4 l-3,-4 l-3,4 l-2,-4 c0,0,-2,3,-2,6 c0,3,6,6,6,6 l0,8 l-10,-8 c0,0,0,10,7,10 l8,0 c7,0,7,-10,7,-10 Z" data-reactid=".0.1.0.0.0.0"></path>
+            </svg>
+            <div class="fpc-slider">
+                <div class="fpc-slider__track">
+                    <div class="fpc-slider__handle-container">
+                        <div class="fpc-slider__handle"></div>
                     </div>
                 </div>
-                <svg class="lfv-controls__icon lfv-controls__icon_focus" data-reactid=".0.1.0.0.2">
-                    <path d="M16,2 l9,20 l-17,0 Z" data-reactid=".0.1.0.0.2.0"></path>
-                    <path d="M6,10 l3,5 l-3,7 l-5,0 Z" data-reactid=".0.1.0.0.2.1"></path>
-                </svg>
-                <div data-reactid=".0.1.0.0.3">Plano focal</div>
             </div>
-          </div>
+            <svg class="fpc-figure" id="montanhas">
+                <path d="M16,2 l9,20 l-17,0 Z" data-reactid=".0.1.0.0.2.0"></path>
+                <path d="M6,10 l3,5 l-3,7 l-5,0 Z" data-reactid=".0.1.0.0.2.1"></path>
+            </svg>
         </div>
       </div>
-      <h2 style="margin-top: 80px;"> Mudança de Ponto de Vista</h2>
+      <h2 style="margin-top: 8vmin;"> Set Point of View </h2>
       <div id="povContainer">
         <div id="pov"></div>
       </div>
     </div>
   </div>
   <footer>
-    <p>Desenvolvido por: Izadora Bandoch e Harllon Oliveira da Paz </p>
+    <p> 2022 @ Developed by: Izadora Bandoch and Harllon Oliveira da Paz </p>
+    <p style="color: rgba(255, 255, 255, 0.5); text-align: right;">
+      Layout v2.0
+    </p>
   </footer>
   <script src="index.js"></script> <!--tem que inserir no head, mas não vi o cod pq a matriz deve estar sendo inserida imediatamente no cod-->
   <script src="script.js"></script>

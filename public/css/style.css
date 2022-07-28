@@ -6,22 +6,23 @@ html, body {
   font-size: medium;
   color: white;
   height: 100%;
+  width: 100%;
 }
 
 h2 {
-  margin-left: 20px;
+  margin-left: 2vmin;
 }
 
 header {
   background: linear-gradient(180deg, rgba(36,78,160,1) 0%, rgba(36,78,160,1) 85%, rgba(5,147,218,1) 100%);
-  padding: 5px;
+  padding: 0.8vmin;
+  height: 10vh;
 }
 .header-image {
     background-image: url("/public/assets/logo_ime.png");
-    width: 75px;
-    height: 90px;
+    width: 8vmin;
+    height: 9.6vh;
     background-size: contain;
-    top: 3px;
     float: left;
 }
 .header-text {
@@ -31,7 +32,8 @@ header {
 
 footer {
   text-align: right;
-  padding: 5px;
+  padding: 1vmin;
+  height: 7.4vh;
   background: linear-gradient(0deg, rgba(36,78,160,1) 0%, rgba(36,78,160,1) 85%, rgba(5,147,218,1) 100%);
 }
 
@@ -42,7 +44,7 @@ footer {
 }
 .column {
   float: left;
-  padding: 10px;
+  padding: 1vmin;
 }
 .column.side {
   width: 20%;
@@ -51,7 +53,7 @@ footer {
   width: 60%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 60vmin) {
   .column.side, .column.middle {
     width: 100%;
   }
@@ -59,19 +61,18 @@ footer {
 
 /* ----------- QUADRO CENTRAL DA IMAGEM -------------- */
 #container {
-  margin: 32px auto;
-  width: 1024px;
+  width: 50vw;
 }
 .lfv-canvas {
   background-color: black;
   position: relative;
-  width: 1024px;
-  height: 768px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  width: 50vw;
+  height: 77vh;
+  box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.5);
 }
 img {
-  width: 1024px;
-  height: 768px;
+  width: 50vw;
+  height: 77vh;
   justify-content: center;
   display: flex;
   overflow: hidden;
@@ -85,14 +86,14 @@ button {
   background-color: #244ea0;
   font-size: large;
   color: white;
-  padding: 14px 50px;
-  border-radius: 6px;
-  box-shadow: 0 0 12px black;
+  padding: 2vmin 5vmin;
+  border-radius: 1vmin;
+  box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.5);
   cursor: pointer;
   display: block;
-  line-height: 20px;
+  line-height: 2vmin;
   width: 75%;
-  margin: 20px 20px;
+  margin: 2vmin 2vmin;
   transition-duration: 0.4s;
 }
 button:hover {
@@ -100,62 +101,158 @@ button:hover {
 }
 
 /* ----------- BOTÃO DE AJUDA -------------- */
-.lfv-button {
+.help-button {
   background-color: #c8301e;
   border-radius: 50%;
-  cursor: pointer;
-  height: 14px;
-  padding: 9px;
-  width: 14px;
-}
-.lfv-controls__button {
+  height: 2vmax;
+  width: 2vmax;
+  padding: 0vmin;
   float: left;
-  margin: 90% 20px;
+  text-align: center;
+  font-weight: bold;
 }
-.lfv-controls__button-icon {
+.help-button:hover {
+  background-color: #ff0000;
+}
+
+/* ---------------- MODAL DE AJUDA ---------------- */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  /* Modal Content/Box */
+.modal-body {padding: 1vmin 2vmin;}
+.modal-content {
+position: relative;
+color: #141417;
+background-color: #fefefe;
+margin: auto;
+padding: 0;
+border: 1px solid #244ea0;
+width: 80%;
+box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.5);
+animation-name: animatetop;
+animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+from {top: -30vmin; opacity: 0}
+to {top: 0; opacity: 1}
+}
+.modal-header {
+padding: 1vmin 2vmin;
+background-color: #0593da;
+color: white;
+}
+
+/* The Close Button */
+.close {
+color: #141417;
+float: right;
+font-size: 3vmin;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+/* ---------------- SLIDER MUDANÇA PLANO FOCAL ---------------- */
+.fpc-container {
+  background-color: rgb(0, 0, 0);
+  width: 20vw; 
+  height: 7vmin;
+  margin-left: 2vmin;
+}
+.fpc-controls {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  float: left;
+  margin: 2vmin 2vmin 0 2vmin;
+}
+.fpc-figure {
   display: block;
-  height: 14px;
-  width: 14px;
+  float: left;
+  height: 7vmin;
+  margin: 0 0.5vmin;
+  width: 2vw;
+  fill: #303035;
 }
-.lfv-controls__button-icon_help > path {
-  fill: none;
-  stroke: white;
-  stroke-width: 2;
+.fpc-slider {
+  height: 7vmin;
+  float: left;
 }
-.lfv-controls__button-icon_help > rect {
-  fill: white;
+.fpc-slider__track {
+  background-color: #2e2f35;
+  border-radius: 3px;
+  display: inline-block;
+  height: 0.7vmin;
+  width: 12vw;
+  margin-top: 1vmin;
+  position: relative;
 }
+.fpc-slider__handle-container {
+  height: 32px;
+  margin: -13px 0 0 -16px;
+  position: absolute;
+  width: 32px;
+}
+.fpc-slider__handle-container:hover > .fpc-slider__handle {
+  border-color: #ff1900;
+}
+.fpc-slider__handle {
+  background-color: #141417;
+  border: 7px solid #c8301e;
+  border-radius: 50%;
+  height: 8px;
+  margin: 5px;
+  width: 8px;
+}
+.fpc-slider_active .fpc-slider__handle {
+  border-color: #ff1900;
+}
+
+
 
 /* ------------ PARA CIMA OK --------------- */
 /* ------------ STAGING AREA --------------- */
 
 #povContainer {
   background-color: rgb(0, 0, 0);
-  width: 384px; 
-  height: 384px;
-  margin-left: 20px;
+  width: 20vw; 
+  height: 40vh;
+  margin-left: 2vmin;
 }
 
-.fpc-container {
-  background-color: rgb(0, 0, 0);
-  width: 384px; 
-  height: 80px;
-  margin-left: 20px;
-}
 
 /* ------------ STAGING AREA --------------- */
 /* ------------- A ANALISAR --------------- */
 .lfv-canvas__display-container {
   margin: 0 auto;
   position: relative;
-  width: 400px; 
-  height: 480px; 
-  margin-top: 0px;
+  width: 40vmin; 
+  height: 48vmin; 
+  margin-top: vmin;
 }
 .lfv-canvas__display {
   vertical-align: bottom;
-  width: 480px;
-  height: 480px;
+  width: 48vmin;
+  height: 48vmin;
 }
 .wrapper {
   margin: 0 auto;
@@ -179,208 +276,71 @@ button:hover {
   margin: 0 16px;
 }
 
+
 /**
- *	Button
- */
+  *	Help window
+  */
+.lfv-help {
+  background-color: #212125;
+  box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.5);
+  color: #eee;
+  line-height: 1.4;
+  margin: 0 15%;
+  position: absolute;
+  top: 10%;
+}
+.lfv-help__header {
+  background-color: #303035;
+  height: 32px;
+  line-height: 32px;
+  padding: 12px 28px;
+}
+.lfv-help__close {
+  float: right;
+}
+.lfv-help__icon-close {
+  display: block;
+  height: 14px;
+  width: 14px;
+}
+.lfv-help__icon-close > line {
+  stroke: #141417;
+  stroke-width: 2;
+}
+.lfv-help__content {
+  box-sizing: border-box;
+  font-size: 14px;
+  overflow: auto;
+  padding: 22px 28px;
+}
+.lfv-help__content-splitter {
+  border-top: 1px solid #303035;
+  margin-top: 14px;
+  padding-top: 14px;
+}
+.lfv-help__content-title {
+  font-size: 16px;
+  padding-right: 28px;
+}
 
-  .lfv-button_disabled {
-    background-color: #4f5157;
-    cursor: default;
-  }
-  .lfv-button:not(.lfv-button_disabled):hover,
-  .lfv-button_active {
-    background-color: #ff1900;
-  }
-  
-  
-  /* ------------------------ BARRA DE CONTROLES (SLIDERS) ------------------------ */
-  .lfv-controls {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  .lfv-controls__row {
-    height: 80px;
-    width: 848px;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  .lfv-controls__slider {
-    color: #676b62;
-    cursor: default;
-    float: left;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin: 22px 14px 0 14px;
-    text-align: center;
-  }
-  .lfv-controls__icon {
-    display: block;
-    float: left;
-    height: 26px;
-    margin: 0 18px;
-    width: 26px;
-  }
-  .lfv-controls__icon_focus {
-    fill: #4f5751;
-  }
-  .lfv-controls .lfv-slider {
-    float: left;
-  }
- 
-  /**
-   *	Help window
-   */
-  .lfv-help {
-    background-color: #212125;
-    box-shadow: 0 0 32px rgba(0, 0, 0, 0.75);
-    color: #eee;
-    line-height: 1.4;
-    margin: 0 15%;
-    position: absolute;
-    top: 10%;
-  }
-  .lfv-help__header {
-    background-color: #303035;
-    height: 32px;
-    line-height: 32px;
-    padding: 12px 28px;
-  }
-  .lfv-help__close {
-    float: right;
-  }
-  .lfv-help__icon-close {
-    display: block;
-    height: 14px;
-    width: 14px;
-  }
-  .lfv-help__icon-close > line {
-    stroke: #141417;
-    stroke-width: 2;
-  }
-  .lfv-help__content {
-    box-sizing: border-box;
-    font-size: 14px;
-    overflow: auto;
-    padding: 22px 28px;
-  }
-  .lfv-help__content-splitter {
-    border-top: 1px solid #303035;
-    margin-top: 14px;
-    padding-top: 14px;
-  }
-  .lfv-help__content-title {
-    font-size: 16px;
-    padding-right: 28px;
-  }
 
-  /**
-   *	Horizontal slider
-   */
-  .lfv-slider {
-    height: 26px;
-  }
-  .lfv-slider__track {
-    background-color: #2e2f35;
-    border-radius: 3px;
-    display: inline-block;
-    height: 6px;
-    width: 216px;
-    margin-top: 10px;
-    position: relative;
-  }
-  .lfv-slider__handle-container {
-    height: 32px;
-    margin: -13px 0 0 -16px;
-    position: absolute;
-    width: 32px;
-  }
-  .lfv-slider__handle-container:hover > .lfv-slider__handle {
-    border-color: #ff1900;
-  }
-  .lfv-slider__handle {
-    background-color: #141417;
-    border: 7px solid #c8301e;
-    border-radius: 50%;
-    height: 8px;
-    margin: 5px;
-    width: 8px;
-  }
-  .lfv-slider_active .lfv-slider__handle {
-    border-color: #ff1900;
-  }
 
-    /* ---------------- INDICADOR DO CLIQUE NO REFOCUS, AINDA NÃO IMPLEMENTADO ---------------- */
-    /* ------------------------- vai precisar estar na própria imagem ------------------------- */
+/* ---------------- INDICADOR DO CLIQUE NO REFOCUS, AINDA NÃO IMPLEMENTADO ---------------- */
+/* ------------------------- vai precisar estar na própria imagem ------------------------- */
 
-    .lfv-focus-marker {
-      display: block;
-      width: 64px;
-      height: 64px;
-      left: -32px;
-      top: -32px;
-      pointer-events: none;
-      position: absolute;
-    }
-    .lfv-focus-marker_hidden {
-      display: none;
-      width: 64px;
-      height: 64px;
-      left: -32px;
-      top: -32px;
-    }
-
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-     /* Modal Content/Box */
-  .modal-body {padding: 2px 16px;}
-  .modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s
-  }
-
-  /* Add Animation */
-  @keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
-  }
-  .modal-header {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-  }
-
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
+.lfv-focus-marker {
+  display: block;
+  width: 64px;
+  height: 64px;
+  left: -32px;
+  top: -32px;
+  pointer-events: none;
+  position: absolute;
+}
+.lfv-focus-marker_hidden {
+  display: none;
+  width: 64px;
+  height: 64px;
+  left: -32px;
+  top: -32px;
+}

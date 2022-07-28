@@ -34,7 +34,6 @@ function createObject(files, folder){
   data.table.push(obj2)
   files.forEach(file => {
     if(file != ".DS_Store"){
-      console.log(file);
       var obj = {
         id: i,
         filename: folder + "/" + file
@@ -51,7 +50,6 @@ app.get('/public/greek', async (req, res) => {
   folder = './public/greek';
   var files = await readdir(folder);
   var data = createObject(files, folder);
-  console.log(data);
   res.json(data);
 });
 
@@ -59,7 +57,6 @@ app.get('/public/tarot', async (req, res) => {
   folder = './public/tarot'
   var files = await readdir(folder);
   var data = createObject(files, folder);
-  console.log(data);
   res.json(data);
 });
 
@@ -67,7 +64,6 @@ app.get('/public/bikes', async (req, res) => {
   folder = './public/bikes'
   var files = await readdir(folder);
   var data = createObject(files, folder);
-  console.log(data);
   res.json(data);
 });
 
@@ -75,6 +71,5 @@ app.get('/public/sideboard', async (req, res) => {
   folder = './public/sideboard'
   var files = await readdir(folder);
   var data = createObject(files, folder);
-  console.log(data);
   res.json(data);
 });
