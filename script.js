@@ -19,6 +19,7 @@ buttonGreek.onclick = function(){
         var size = files.table[0].size
         size2 = size
         loadRadios(size)
+        loadImage(0)
     };
 };
 
@@ -32,6 +33,7 @@ buttonSideboard.onclick = function(){
         var size = files.table[0].size
         size2 = size
         loadRadios(size)
+        loadImage(0)
     };
 };
 
@@ -45,6 +47,7 @@ buttonBike.onclick = function(){
         var size = files.table[0].size
         size2 = size
         loadRadios(size)
+        loadImage(0)
     };
 };
 
@@ -58,6 +61,7 @@ buttonTarot.onclick = function(){
         var size = files.table[0].size
         size2 = size
         loadRadios(size)
+        loadImage(0)
     };
 };
 
