@@ -67,9 +67,7 @@ buttonTarot.onclick = function(){
 
 //LOAD IMAGES WHEN USING MATRIX
 function loadImage(i){
-    console.log(i);
     var index = parseInt(i) + 1
-    console.log(files.table[index].filename)
     document.getElementById("mainImage").src = files.table[index].filename;
 }
 
@@ -147,8 +145,7 @@ function loadRadios(size){
 
     containing.style.width = dimensionW.toString() + "px";
     containing.style.height = dimensionH.toString() + "px";
-    //containing.style.width = "190px";
-    //containing.style.height = "180px";
+
     var radios = document.querySelectorAll('input[type=radio][name="myRadio"]');
     Array.prototype.forEach.call(radios, function(radio) {
         radio.addEventListener('change', changeHandler);
