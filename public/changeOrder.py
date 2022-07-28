@@ -1,8 +1,10 @@
 import os
+import shutil
 fnames = sorted(os.listdir('.'))
 i = 0
-new_name = str(i) + '.png'
+#new_name = str(i) + '.png'
 for fname in fnames:
+    #print(fname)
     x = ""
     i = 4
     while(True):
@@ -15,8 +17,10 @@ for fname in fnames:
             break
     #x = fname.replace("ppm", "jpg")
     if(fname != "renomear.py"):
-        x = x + '.png'
-        os.rename(fname, x, dst_dir_fd="newFile")
+        newName = x + '.png'
+        filename = fname
+        shutil.copy(filename, "folder/"+ newName)
+        #os.rename(fname, x, dst_dir_fd="newFile")
     #if(fname != "renomear.py"):
     #    os.rename(fname, new_name)
     #    i = i + 1

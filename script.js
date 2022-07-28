@@ -63,7 +63,9 @@ buttonTarot.onclick = function(){
 
 //LOAD IMAGES WHEN USING MATRIX
 function loadImage(i){
-    var index = parseInt(i) + 2
+    console.log(i);
+    var index = parseInt(i) + 1
+    console.log(files.table[index].filename)
     document.getElementById("mainImage").src = files.table[index].filename;
 }
 
@@ -96,16 +98,16 @@ function newArrowMove(code){
         var n = Math.sqrt(size2)
         if(code === "ArrowDown"){
             radios[parseInt(selectedSize)+n].checked = true
-            loadImage(parseInt(selectedSize))
+            loadImage(parseInt(selectedSize)+n)
         }else if(code === "ArrowUp"){
             radios[parseInt(selectedSize)-n].checked = true
-            loadImage(parseInt(selectedSize))
+            loadImage(parseInt(selectedSize)-n)
         }else if(code === "ArrowRight"){
             radios[parseInt(selectedSize)+1].checked = true
-            loadImage(parseInt(selectedSize))
+            loadImage(parseInt(selectedSize)+1)
         }else if(code === "ArrowLeft"){
             radios[parseInt(selectedSize)-1].checked = true
-            loadImage(parseInt(selectedSize))
+            loadImage(parseInt(selectedSize)-1)
         }
     }
 }
@@ -152,7 +154,7 @@ function loadRadios(size){
 
 //CHANGE THE IMAGE
 function changeHandler(event) {
-    loadImage(this.value)            
+    loadImage(this.value, false)         
 }
 
 //MODAL BEHAVIOUR
