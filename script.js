@@ -14,12 +14,13 @@ buttonGreek.onclick = function(){
     xhr.open('get', 'http://localhost:3000/public/greek');
     xhr.send();
 
-    xhr.onload = function() {
+    xhr.onload = async function() {
         files = JSON.parse(xhr.response)
         var size = files.table[0].size
         size2 = size
         loadRadios(size)
-        loadImage(0)
+        await loadImage(0)
+        createMatrix(size)
     };
 };
 
@@ -68,7 +69,13 @@ buttonTarot.onclick = function(){
 //LOAD IMAGES WHEN USING MATRIX
 function loadImage(i){
     var index = parseInt(i) + 1
-    document.getElementById("mainImage").src = files.table[index].filename;
+    var p1 = new Promise(function(resolve, reject){
+        document.getElementById("mainImage").src = files.table[index].filename;    
+        resolve()
+    })
+    p1.then(console.log("terminei"));
+    return p1
+    //document.getElementById("mainImage").src = files.table[index].filename;
 }
 
 //CHANGE THE DEFAULT BEHAVIOUR OF ARROW KEY WHEN USING THE RADIOBOX
@@ -184,95 +191,150 @@ window.onclick = function(event) {
   }
 }
 
-
-
-
 //REFOCUS
 
-/*var imgok = new Image();
-imgok.src = document.getElementById("mainImage").src
-const canvas = document.createElement('canvas'); 
-const ctx = canvas.getContext('2d'); 
- 
-canvas.width = imgok.width; 
-console.log(canvas.width);
-canvas.height = imgok.height; 
-console.log(canvas.height);
- 
-ctx.drawImage(imgok, 0, 0); 
- 
-const imgData = ctx.getImageData( 
-  0, 0, imgok.width, imgok.height 
-).data; 
-console.log(imgData.length);
+function CreatePixelMatrix(){
+    const canvas = document.createElement('canvas'); 
+    const ctx = canvas.getContext('2d'); 
+    var matrixSubImages = []
+    var img;
+    for(var i = 0; i<imgMatrix.length; i++){
+        matrixSubImages[i] = []
+        for(var j = 0; j<imgMatrix[0].length; j++){
+            img = new Image()
+            img.src = imgMatrix[i][j]
+            canvas.width = img.width; 
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0)
+            const imgData =  ctx.getImageData( 
+                0, 0, img.width, img.height 
+            ).data; 
+            var matrizPixels = []
+            var p = 0;
+            matrizPixels[p] = []
+            for(var k = 0; k< imgData.length-3; k=k+4){
+                if(k%(4*img.width) == 0 && k != 0){
+                    p++
+                    matrizPixels[p] = []
+                }
+                var pixel = [imgData[k], imgData[k+1], imgData[k+2], imgData[k+3]]
+                matrizPixels[p].push(pixel)
+            }
+            matrixSubImages[i].push(matrizPixels)
+        }
+    }
 
-var matrizPixels = []
-var j = 0
-for(var i = 0; i< imgData.length-3; i=i+4){
-    var pixel = [imgData[i], imgData[i+1], imgData[i+2], imgData[i+3]]
-    
-    matrizPixels[j] = []
-    matrizPixels[j].push(pixel)
+    console.log(matrixSubImages)
+
+    refocus(matrixSubImages)
 }
-console.log(matrizPixels[0][0])
-*/
-
-/*function refocus(){
+var s = 2
+var t = 2
+function refocus(matrixSubImages){
+    //const ctx = canvas.getContext('2d'); 
+    const canvas2 = document.getElementById('cv'); 
+    canvas2.width = 512;
+    canvas2.height = 512;
+    const ctx2 = canvas2.getContext('2d'); 
     var Srefocus = s - 0.4
     var Trefocus = t - 0.4
-    var sumS = 0;
-    var sumT = 0;
-    var disp = 0.3
-    for(var i = 0; i< imgMatrix.length; i++){
-        sumS = sumS + (i - Srefocus)
-    }
-    for(var j = 0; j< imgMatrix[0].length; j++){
-        sumT = sumT + (j - Trefocus)
-    }
-    var valueS = sumS*disp
-    var valueT = sumT*disp
-    for(var i = 0; i< imgData.length; i++){
-        imgData
-    }
-}*/
 
-/*var imgMatrix = []
-var s
-var t
-async function createMatrix(size){
-    var tempSize = size-1
-   // var imgMatrix = []
-    var img = []
-    var j = 0;
-    for(var i =0; i< tempSize; i++){
-        if(i % Math.sqrt(tempSize) == 0 && i != 0){
-            console.log(j)
-            //imgMatrix[j] = []
-            imgMatrix.push(img)
-            console.log(imgMatrix)
-            j++
-            //console.log(i)
-            img = []
+    var disp = -0.8
+
+    matriz = matrixSubImages[s][t];
+
+    var red = 0;
+    var blue = 0;
+    var green = 0;
+    var alpha = 0;
+
+    for(var u=0; u< matriz.length; u++){
+        for(var v=0; v<matriz[0].length; v++){
+            for(var i =0; i<matrixSubImages.length; i++){
+                for(var j =0; j<matrixSubImages[0].length; j++){
+                    var newU = parseInt(Math.round(u + (i-Srefocus)*disp))
+                    var newV = parseInt(Math.round(v + (j-Trefocus)*disp))
+                    if(newU < 0) newU = 0;
+                    if(newV < 0) newV = 0;
+                    if(newU >= matriz.length) newU = matriz.length-1
+                    if(newV >= matriz.length) newV = matriz.length-1
+                    if(u==256 && v ==256){
+                        console.log(matrixSubImages[i][j][newU][newV][0]);
+                    }
+                    red = red + matrixSubImages[i][j][newU][newV][0];
+                    green = green + matrixSubImages[i][j][newU][newV][1];
+                    blue = blue + matrixSubImages[i][j][newU][newV][2];
+                    alpha = alpha + matrixSubImages[i][j][newU][newV][3];
+                }
+            }
+            red = parseInt(red/81)
+            green = parseInt(green/81)
+            blue = parseInt(blue/81)
+            if(red > 255) red = 255;
+            if(blue > 255) blue = 255;
+            if(green > 255) green = 255;
+            if(alpha > 255) alpha = 255;
+            matriz[u][v][0] = red; 
+            matriz[u][v][1] = green; 
+            matriz[u][v][2] = blue; 
+            matriz[u][v][3] = alpha;
+            red = 0;
+            green = 0;
+            blue = 0;
+            alpha = 0; 
         }
-        img.push(files.table[i+2].filename)
-        //console.log(img[0][1])
-        //imgMatrix[i].push(img)
-        //console.log(imgMatrix[0].length)
     }
+
+    var myImageData = ctx2.createImageData(512, 512);
+    var data = myImageData.data;
+    var k = 0;
+    for(var i = 0; i< 512; i++){
+        for(var j = 0; j< 512; j++){
+            data[k] = matriz[i][j][0]
+            data[k+1] = matriz[i][j][1]
+            data[k+2] = matriz[i][j][2]
+            data[k+3] = matriz[i][j][3]
+            k = k + 4;
+        }
+    }
+    console.log("data dps")
+    console.log(data)
+    console.log(myImageData.data)
+    ctx2.putImageData(myImageData, 0, 0);
+}
+
+var imgMatrix = []
+
+async function createMatrix(size){
+    var img = []
+    var vetorDeImagens = []
+    var j = 0;
+    for(var i =0; i< size; i++){
+        var imagem = new Image();
+        if(i % Math.sqrt(size) == 0 && i != 0){
+            imgMatrix.push(img)
+            j++
+            img = []
+
+        }
+        imagem.src = files.table[i+1].filename
+        vetorDeImagens.push(imagem);
+        img.push(files.table[i+1].filename)
+    }
+    await later(10000);
+    for(var i = 0; i< vetorDeImagens.length; i++){
+        console.log(vetorDeImagens[i].src)
+        console.log(vetorDeImagens[i].width)
+        console.log(vetorDeImagens[i].height)
+    }
+    imgMatrix.push(img)
     console.log("Valor da linha da matriz")
     console.log(imgMatrix)
-
-}*/
-
-//REFOCUS DENTRO DO LOADIMAGE
-    /*for(var i = 0; i < imgMatrix.length; i++ ){
-        for(var j = 0; j< imgMatrix[0].length; j++){
-            if(imgMatrix[i][j] == files.table[index].filename){
-                s = i
-                t = j
-                console.log(s)
-                console.log(t)
-                break;
-            }
-        }
-    }*/
+    await later(10000)
+    CreatePixelMatrix()
+}
+function later(delay) {
+    return new Promise(function(resolve) {
+        setTimeout(resolve, delay);
+    });
+}
