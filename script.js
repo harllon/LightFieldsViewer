@@ -7,7 +7,7 @@ var buttonBike = document.getElementById("bike")
 var buttonTarot = document.getElementById("tarot")
 
 var files;
-var size2;
+var size;
 var s = 0
 var t = 0
 var disp;
@@ -29,8 +29,7 @@ buttonGreek.onclick = function(){
 
     xhr.onload = async function() {
         files = JSON.parse(xhr.response)
-        var size = files.table[0].size
-        size2 = size
+        size = files.table[0].size
         loadRadios(size)
         await loadImage(0)
         createMatrix(size)
@@ -46,10 +45,12 @@ buttonSideboard.onclick = function(){
 
     xhr.onload = function() {
         files = JSON.parse(xhr.response)
-        var size = files.table[0].size
-        size2 = size
+        size = files.table[0].size
         loadRadios(size)
         loadImage(0)
+        createMatrix(size)
+        rangeslider.max = 3
+        rangeslider.min = -3
     };
 };
 
@@ -60,10 +61,12 @@ buttonBike.onclick = function(){
 
     xhr.onload = function() {
         files = JSON.parse(xhr.response)
-        var size = files.table[0].size
-        size2 = size
+        size = files.table[0].size
         loadRadios(size)
         loadImage(0)
+        createMatrix(size)
+        rangeslider.max = 3
+        rangeslider.min = -3
     };
 };
 
@@ -74,10 +77,12 @@ buttonTarot.onclick = function(){
 
     xhr.onload = function() {
         files = JSON.parse(xhr.response)
-        var size = files.table[0].size
-        size2 = size
+        size = files.table[0].size
         loadRadios(size)
         loadImage(0)
+        createMatrix(size)
+        rangeslider.max = 3
+        rangeslider.min = -3
     };
 };
 
@@ -85,7 +90,9 @@ buttonTarot.onclick = function(){
 function loadImage(i){
     var index = parseInt(i) + 1
     var p1 = new Promise(function(resolve, reject){
+
         document.getElementById("mainImage").src = files.table[index].filename;
+        
         for(var i = 0; i< imgMatrix.length; i++){
             for(var j = 0; j<imgMatrix[0].length; j++){
                 if(imgMatrix[i][j] == files.table[index].filename){
@@ -100,7 +107,6 @@ function loadImage(i){
     })
     p1.then(console.log("terminei"));
     return p1
-    //document.getElementById("mainImage").src = files.table[index].filename;
 }
 
 //CHANGE THE DEFAULT BEHAVIOUR OF ARROW KEY WHEN USING THE RADIOBOX
@@ -119,7 +125,7 @@ function newArrowMove(code){
     var radios = document.querySelectorAll('input[type=radio][name="myRadio"]');
     let selectedSize;
     var hascheck = false
-    var n = Math.sqrt(size2)
+    var n = Math.sqrt(size)
     for (const radioButton of radios) {
         if (radioButton.checked) {
             selectedSize = radioButton.value;
@@ -129,7 +135,7 @@ function newArrowMove(code){
         }
     }
     if(hascheck){
-        var n = Math.sqrt(size2)
+        //var n = Math.sqrt(size)
         if(code === "ArrowDown"){
             radios[parseInt(selectedSize)+n].checked = true
             loadImage(parseInt(selectedSize)+n)
@@ -225,8 +231,8 @@ function CreatePixelMatrix(){
     for(var i = 0; i<imgMatrix.length; i++){
         matrixSubImages[i] = []
         for(var j = 0; j<imgMatrix[0].length; j++){
-            img = new Image()
-            img.src = imgMatrix[i][j]
+            //img = new Image()
+            img = imgMatrix[i][j]
             canvas.width = img.width; 
             canvas.height = img.height;
             ctx.drawImage(img, 0, 0)
@@ -256,12 +262,12 @@ function CreatePixelMatrix(){
 function refocus(){
     console.log("opa")
     matriz = matrixSubImages[s][t];
-    var img = document.getElementById("mainImage").src
+    //var img = document.getElementById("mainImage")
     //const ctx = canvas.getContext('2d'); 
     const canvas2 = document.getElementById('cv'); 
-    canvas2.width = 512;
-    canvas2.height = 512;
     const ctx2 = canvas2.getContext('2d'); 
+    canvas2.width = width
+    canvas2.height = height
     var Srefocus = s - 0.4
     var Trefocus = t - 0.4
 
@@ -290,9 +296,9 @@ function refocus(){
                     alpha = alpha + matrixSubImages[i][j][newU][newV][3];
                 }
             }
-            red = parseInt(red/81)
-            green = parseInt(green/81)
-            blue = parseInt(blue/81)
+            red = parseInt(red/size)
+            green = parseInt(green/size)
+            blue = parseInt(blue/size)
             if(red > 255) red = 255;
             if(blue > 255) blue = 255;
             if(green > 255) green = 255;
@@ -308,9 +314,10 @@ function refocus(){
         }
     }
 
-    var myImageData = ctx2.createImageData(512, 512);
+    var myImageData = ctx2.createImageData(width, height);
     var data = myImageData.data;
     var k = 0;
+    //tirar esses 512
     for(var i = 0; i< 512; i++){
         for(var j = 0; j< 512; j++){
             data[k] = matriz[i][j][0]
@@ -323,30 +330,39 @@ function refocus(){
     console.log("data dps")
     console.log(data)
     console.log(myImageData.data)
+    //ctx2.drawImage(myImageData, 0, 0)
     ctx2.putImageData(myImageData, 0, 0);
+    var src = canvas2.toDataURL()
+    ctx2.clearRect(0, 0, width, height)
+    //ctx2.drawImage(img, 0,0);
     console.log(canvas2.toDataURL())
+    document.getElementById("mainImage").src = src
+    
 }
 
 var imgMatrix = []
+var width;
+var height;
 
 async function createMatrix(size){
+    imgMatrix=[]
     var img = []
-    var vetorDeImagens = []
     var j = 0;
     for(var i =0; i< size; i++){
-        var imagem = new Image();
+        var image = new Image();
         if(i % Math.sqrt(size) == 0 && i != 0){
             imgMatrix.push(img)
             j++
             img = []
-
         }
-        imagem.src = files.table[i+1].filename
-        vetorDeImagens.push(imagem);
-        img.push(files.table[i+1].filename)
+        image.src = files.table[i+1].filename
+        img.push(image)
     }
     await later(10000);
-
+    width = image.width
+    console.log(width)
+    height = image.height
+    console.log(height)
     imgMatrix.push(img)
     console.log("Valor da linha da matriz")
     console.log(imgMatrix)
@@ -361,8 +377,3 @@ function later(delay) {
     });
 }
 
-
-
-/*rangeslider.oninput = function() {
-    console.log(this.value)
-}*/
