@@ -172,7 +172,7 @@ cursor: pointer;
 /* ---------------- SLIDER MUDANÇA PLANO FOCAL ---------------- */
 .fpc-container {
   background-color: rgb(0, 0, 0);
-  width: 20vw; 
+  width: 22vw; 
   height: 7vmin;
   margin-left: 2vmin;
 }
@@ -190,7 +190,7 @@ cursor: pointer;
   float: left;
   height: 7vmin;
   margin: 0 0.5vmin;
-  width: 2vw;
+  width: 3vw;
   fill: #303035;
 }
 .fpc-slider {
@@ -207,10 +207,13 @@ cursor: pointer;
   position: relative;
 }
 .fpc-slider__handle-container {
+  background-color: #141417;
+  background: #2e2f35;
+  border-color: #ff1900;
   height: 32px;
   margin: -13px 0 0 -16px;
   position: absolute;
-  width: 32px;
+  width: 160px;
 }
 .fpc-slider__handle-container:hover > .fpc-slider__handle {
   border-color: #ff1900;
@@ -222,6 +225,7 @@ cursor: pointer;
   height: 8px;
   margin: 5px;
   width: 8px;
+  
 }
 .fpc-slider_active .fpc-slider__handle {
   border-color: #ff1900;

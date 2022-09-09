@@ -8,6 +8,19 @@ var buttonTarot = document.getElementById("tarot")
 
 var files;
 var size2;
+var s = 0
+var t = 0
+var disp;
+
+var rangeslider = document.getElementById("sliderRange");
+rangeslider.addEventListener('change', rangeChange)
+
+function rangeChange(){
+    disp = this.value;
+    console.log(disp);
+    console.log("oi");
+    refocus()
+}
 
 buttonGreek.onclick = function(){
     let xhr = new XMLHttpRequest();
@@ -21,6 +34,8 @@ buttonGreek.onclick = function(){
         loadRadios(size)
         await loadImage(0)
         createMatrix(size)
+        rangeslider.max = 3
+        rangeslider.min = -3
     };
 };
 
@@ -70,7 +85,17 @@ buttonTarot.onclick = function(){
 function loadImage(i){
     var index = parseInt(i) + 1
     var p1 = new Promise(function(resolve, reject){
-        document.getElementById("mainImage").src = files.table[index].filename;    
+        document.getElementById("mainImage").src = files.table[index].filename;
+        for(var i = 0; i< imgMatrix.length; i++){
+            for(var j = 0; j<imgMatrix[0].length; j++){
+                if(imgMatrix[i][j] == files.table[index].filename){
+                    s = i;
+                    t = j;
+                    console.log("encontrei s: %d e t: %d", s, t);
+                }
+            }
+        }
+        console.log(" s: %d e t: %d", s, t);  
         resolve()
     })
     p1.then(console.log("terminei"));
@@ -192,11 +217,10 @@ window.onclick = function(event) {
 }
 
 //REFOCUS
-
+var matrixSubImages = []
 function CreatePixelMatrix(){
     const canvas = document.createElement('canvas'); 
     const ctx = canvas.getContext('2d'); 
-    var matrixSubImages = []
     var img;
     for(var i = 0; i<imgMatrix.length; i++){
         matrixSubImages[i] = []
@@ -226,11 +250,13 @@ function CreatePixelMatrix(){
 
     console.log(matrixSubImages)
 
-    refocus(matrixSubImages)
+    //refocus()
 }
-var s = 2
-var t = 2
-function refocus(matrixSubImages){
+
+function refocus(){
+    console.log("opa")
+    matriz = matrixSubImages[s][t];
+    var img = document.getElementById("mainImage").src
     //const ctx = canvas.getContext('2d'); 
     const canvas2 = document.getElementById('cv'); 
     canvas2.width = 512;
@@ -239,9 +265,6 @@ function refocus(matrixSubImages){
     var Srefocus = s - 0.4
     var Trefocus = t - 0.4
 
-    var disp = -0.8
-
-    matriz = matrixSubImages[s][t];
 
     var red = 0;
     var blue = 0;
@@ -301,6 +324,7 @@ function refocus(matrixSubImages){
     console.log(data)
     console.log(myImageData.data)
     ctx2.putImageData(myImageData, 0, 0);
+    console.log(canvas2.toDataURL())
 }
 
 var imgMatrix = []
@@ -322,19 +346,23 @@ async function createMatrix(size){
         img.push(files.table[i+1].filename)
     }
     await later(10000);
-    for(var i = 0; i< vetorDeImagens.length; i++){
-        console.log(vetorDeImagens[i].src)
-        console.log(vetorDeImagens[i].width)
-        console.log(vetorDeImagens[i].height)
-    }
+
     imgMatrix.push(img)
     console.log("Valor da linha da matriz")
     console.log(imgMatrix)
-    await later(10000)
+
     CreatePixelMatrix()
 }
+
+       
 function later(delay) {
     return new Promise(function(resolve) {
         setTimeout(resolve, delay);
     });
 }
+
+
+
+/*rangeslider.oninput = function() {
+    console.log(this.value)
+}*/
