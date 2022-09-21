@@ -8,10 +8,10 @@ router.get('/', (req, res, next) =>{
     res.status(200).render(path.join(__dirname, '../views/index.html'));
 });
 
-router.get('/src/public/greek', controller.greekController);
-router.get('/public/sideboard', controller.sideboardController);
-router.get('/public/bikesResized', controller.bikesController);
-router.get('/public/tarotResized', controller.tarotController);
+router.get('/src/public/datasets/greek', controller.greekController);
+router.get('/src/public/datasets/sideboard', controller.sideboardController);
+router.get('/src/public/datasets/bikesResized', controller.bikesController);
+router.get('/src/public/datasets/tarotResized', controller.tarotController);
 
 
 module.exports = router;

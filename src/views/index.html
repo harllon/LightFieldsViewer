@@ -44,8 +44,8 @@
     </div> 
 
     <div class="column middle" id="container">
-      <div class="lfv-canvas">      
-        <img src="public/assets/chess.jpg" id="mainImage">
+      <div class="lfv-canvas">   
+        <img id="mainImage">
       </div>          
     </div>
 
@@ -67,23 +67,6 @@
             </svg>
         </div>
       </div>
-      <h2> Set Initial Shift </h2>
-      <div class="fpc-container">
-        <div class="fpc-controls">
-            <svg class="fpc-figure" id="flor">
-                <path d="M14,22 l0,-8 c0,0,6,-3,6,-6 c0,-3,-2,-6,-2,-6 l-2,4 l-3,-4 l-3,4 l-2,-4 c0,0,-2,3,-2,6 c0,3,6,6,6,6 l0,8 l-10,-8 c0,0,0,10,7,10 l8,0 c7,0,7,-10,7,-10 Z" data-reactid=".0.1.0.0.0.0"></path>
-            </svg>
-            <div class="fpc-slider">
-                <div class="fpc-slider__track">
-                  <input type="range" min="-1" max="1" step="0.1" value="0.2" class="fpc-slider__handle-container"  id="shiftSlider">
-                </div>
-            </div>
-            <svg class="fpc-figure" id="montanhas">
-                <path d="M16,2 l9,20 l-17,0 Z" data-reactid=".0.1.0.0.2.0"></path>
-                <path d="M6,10 l3,5 l-3,7 l-5,0 Z" data-reactid=".0.1.0.0.2.1"></path>
-            </svg>
-        </div>
-      </div>
       <h2 style="margin-top: 8vmin;"> Set Point of View </h2>
       <div id="povContainer">
         <div id="pov"></div>
@@ -96,7 +79,12 @@
       Layout v2.0
     </p>
   </footer>
-  <script src="/script.js"></script> <!--tem que inserir no head, mas não vi o cod pq a matriz deve estar sendo inserida imediatamente no cod-->
+  <script src="/javascript/requisition.js"></script> <!--tem que inserir no head, mas não vi o cod pq a matriz deve estar sendo inserida imediatamente no cod-->
+  <script src="/javascript/helpModal.js"></script>
+  <script src="/javascript/viewPoint.js"></script>
+  <script src="/javascript/refocus.js"></script>
+  <script src="/javascript/lightField.js"></script>
+  <script src="/javascript/loadImage.js"></script>
   <canvas class="img" id="cv"></canvas>
 </body>
 </html>

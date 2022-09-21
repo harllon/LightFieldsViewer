@@ -1,22 +1,17 @@
 const http = require('http');
 const debug = require('debug')('pfc:server');
 const cors = require('cors');
-const corsOptions ={
-    origin:'http://0.0.0.0:3000', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
 
 const app = require('../src/app');
 const port = normalizePort(process.env.PORT || '3000');;
 app.set('port', port);
 app.set('')
 app.use(cors());
-//app.use(cors())
 
 const server = http.createServer(app);
-
-server.listen(port, '192.168.5.102');
+var hostname = '192.168.5.102'
+var hostname2 = '172.15.4.172'
+server.listen(port, hostname2);
 server.on('error', onError);
 server.on('listening', onListening);
 console.log('API rodando na porta: ' + port);

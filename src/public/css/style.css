@@ -348,3 +348,53 @@ cursor: pointer;
   left: -32px;
   top: -32px;
 }
+
+label{
+  position:inherit;
+  top: -50vmin;
+  right: -20vmin;
+}
+progress {
+  --_radius: 1e3px;
+
+  /*  reset  */
+  appearance: none;
+  border: none;
+
+  border-radius: var(--_radius);
+  overflow: hidden;
+  top: -20vmin;
+  right: 10vmin;
+  height: 15px;
+  width: 50vmin;
+}
+progress::-webkit-progress-value { background: blue; }
+
+progress:not([max])[value="1"]::before,
+progress[max="100"][value="100"]::before {
+  content: "✓";
+  
+  position: absolute;
+  inset-block: 0;
+  inset-inline: auto 0;
+  display: flex;
+  align-items: center;
+  padding-inline-end: max(calc(var(--_track-size) / 4), 3px);
+
+  font-size: calc(var(--_track-size) / 1.25);
+}
+
+#myProgress {
+  width: 50%;
+  background-color: grey;
+  position: absolute;
+  top: 34vmin;
+  right: 24vmin;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: blue;
+  
+}
