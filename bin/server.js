@@ -11,7 +11,7 @@ app.use(cors());
 const server = http.createServer(app);
 var hostname = '192.168.5.102'
 var hostname2 = '172.15.4.172'
-server.listen(port, hostname2);
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 console.log('API rodando na porta: ' + port);

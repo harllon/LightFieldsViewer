@@ -1,3 +1,5 @@
 node_modules
 backup
 172.20.10.50
+src/public/datasets/labResized
+src/public/datasets/poznanlab

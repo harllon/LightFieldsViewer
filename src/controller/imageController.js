@@ -52,9 +52,75 @@ const tarotController = async (req, res) => {
     });
 }
 
+const fountainController = async (req, res) => {
+    var folder = './src/public/datasets/fountainResized';
+    var imgSrc = './public/datasets/fountainResized';
+    await readdir(folder).then(files => {
+        var data = utilFunctions.createObject(files, imgSrc);
+        res.status(200).json(data);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).send({message: 'There was a problem in the server'});
+    });
+}
+
+const dangerController = async (req, res) => {
+    var folder = './src/public/datasets/dangerResized';
+    var imgSrc = './public/datasets/dangerResized';
+    await readdir(folder).then(files => {
+        var data = utilFunctions.createObject(files, imgSrc);
+        res.status(200).json(data);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).send({message: 'There was a problem in the server'});
+    });
+}
+
+const stoneController = async (req, res) => {
+    var folder = './src/public/datasets/stoneResized';
+    var imgSrc = './public/datasets/stoneResized';
+    console.log("opa")
+    await readdir(folder).then(files => {
+        var data = utilFunctions.createObject(files, imgSrc);
+        res.status(200).json(data);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).send({message: 'There was a problem in the server'});
+    });
+}
+
+const labController = async (req, res) => {
+    var folder = './src/public/datasets/labResized';
+    var imgSrc = './public/datasets/labResized';
+    await readdir(folder).then(files => {
+        var data = utilFunctions.createObject(files, imgSrc);
+        res.status(200).json(data);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).send({message: 'There was a problem in the server'});
+    });
+}
+
+const airplaneController = async (req, res) => {
+    var folder = './src/public/datasets/airplane';
+    var imgSrc = './public/datasets/airplane';
+    await readdir(folder).then(files => {
+        var data = utilFunctions.createObject(files, imgSrc);
+        res.status(200).json(data);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).send({message: 'There was a problem in the server'});
+    });
+}
+
 module.exports = {
     greekController,
     sideboardController,
     bikesController,
-    tarotController
+    tarotController,
+    fountainController,
+    airplaneController,
+    dangerController,
+    labController,
+    stoneController
 }
