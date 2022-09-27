@@ -3,10 +3,12 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  font-size: medium;
+  font-size: 16px;
   color: white;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 h2 {
@@ -15,25 +17,29 @@ h2 {
 
 header {
   background: linear-gradient(180deg, rgba(36,78,160,1) 0%, rgba(36,78,160,1) 85%, rgba(5,147,218,1) 100%);
-  padding: 0.8vmin;
   height: 10vh;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 .header-image {
     background-image: url("/public/assets/logo_ime.png");
-    width: 8vmin;
-    height: 9.6vh;
+    width: 40px;
+    height: 45px;
+    margin: 10px;
     background-size: contain;
-    float: left;
+    background-repeat: no-repeat;
 }
 .header-text {
-    font-size: large;
-    position: relative;
+    font-size: 1.2em;    
 }
 
 footer {
   text-align: right;
+  margin-top:auto; 
   padding: 1vmin;
-  height: 7.4vh;
+  height: 6vh;
+  min-height:50px;
   background: linear-gradient(0deg, rgba(36,78,160,1) 0%, rgba(36,78,160,1) 85%, rgba(5,147,218,1) 100%);
 }
 
@@ -45,17 +51,24 @@ footer {
 .column {
   float: left;
   padding: 1vmin;
+
 }
 .column.side {
   width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .column.middle {
   width: 60%;
 }
 
-@media screen and (max-width: 60vmin) {
-  .column.side, .column.middle {
+@media screen and (max-width: 768px) {
+  .column.side, .column.middle, .column {
     width: 100%;
+  }
+  img, .lfv-canvas {
+    width: 100vw;
   }
 }
 
@@ -82,22 +95,36 @@ img {
 }
 
 /* ----------- BOTÃO DATASETS -------------- */
+.datasetsContainer {
+  height: 67vh;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
 button {
   background-color: #244ea0;
-  font-size: large;
+  font-size: 1em;
   color: white;
-  padding: 2vmin 5vmin;
+  padding: 1vmin 1vmin;
   border-radius: 1vmin;
   box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.5);
   cursor: pointer;
   display: block;
-  line-height: 2vmin;
-  width: 75%;
-  margin: 2vmin 2vmin;
+  width: 100%;
+  margin: 0 0;
   transition-duration: 0.4s;
+}
+button:focus {
+  background-color: #0593da;
 }
 button:hover {
   background-color: #0593da;
+}
+button:active {
+  background-color: #244ea0;
 }
 
 /* ----------- BOTÃO DE AJUDA -------------- */
@@ -107,9 +134,10 @@ button:hover {
   height: 2vmax;
   width: 2vmax;
   padding: 0vmin;
-  float: left;
+  float: right;
   text-align: center;
   font-weight: bold;
+  align-self: flex-end;
 }
 .help-button:hover {
   background-color: #ff0000;
@@ -125,8 +153,8 @@ button:hover {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  
 }
   /* Modal Content/Box */
 .modal-body {padding: 1vmin 2vmin;}
@@ -137,7 +165,8 @@ background-color: #fefefe;
 margin: auto;
 padding: 0;
 border: 1px solid #244ea0;
-width: 80%;
+border-radius: 1vmin;
+width: 50%;
 box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.5);
 animation-name: animatetop;
 animation-duration: 0.4s
@@ -171,230 +200,42 @@ cursor: pointer;
 
 /* ---------------- SLIDER MUDANÇA PLANO FOCAL ---------------- */
 .fpc-container {
-  background-color: rgb(0, 0, 0);
-  width: 22vw; 
-  height: 7vmin;
-  margin-left: 2vmin;
+  background-color: #244ea0;
+  width: 100%; 
+  height: 60px;
+  line-height: 1.5vmin;
+  box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.5);
+  border-radius: 1vmin;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.fpc-controls {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: default;
-  float: left;
-  margin: 2vmin 2vmin 0 2vmin;
-}
+
 .fpc-figure {
-  display: block;
-  float: left;
-  height: 7vmin;
-  margin: 0 0.5vmin;
-  width: 3vw;
-  fill: #303035;
-}
-.fpc-slider {
-  height: 7vmin;
-  float: left;
-}
-.fpc-slider__track {
-  background-color: #2e2f35;
-  border-radius: 3px;
   display: inline-block;
-  height: 0.7vmin;
-  width: 12vw;
-  margin-top: 1vmin;
-  position: relative;
+  float: left;
+  height: 25px;
+  width: 25px;
+  fill: #8191b1;
+  padding: 5px;
 }
-.fpc-slider__handle-container {
-  background-color: #141417;
-  background: #2e2f35;
-  border-color: #ff1900;
-  height: 32px;
-  margin: -13px 0 0 -16px;
-  position: absolute;
-  width: 160px;
-}
-.fpc-slider__handle-container:hover > .fpc-slider__handle {
-  border-color: #ff1900;
-}
-.fpc-slider__handle {
-  background-color: #141417;
-  border: 7px solid #c8301e;
-  border-radius: 50%;
-  height: 8px;
-  margin: 5px;
-  width: 8px;
-  
-}
-.fpc-slider_active .fpc-slider__handle {
-  border-color: #ff1900;
+
+.fpc-slider {
+  display: inline-block;
+  float: left;
+  cursor: pointer;
 }
 
 
-
-/* ------------ PARA CIMA OK --------------- */
-/* ------------ STAGING AREA --------------- */
+/* ------------ MATRIZ DE PONTOS DE VISTA --------------- */
 
 #povContainer {
-  background-color: rgb(0, 0, 0);
-  width: 20vw; 
+  background-color: #244ea0;
+  width: 100%; 
   height: 40vh;
-  margin-left: 2vmin;
-}
-
-
-/* ------------ STAGING AREA --------------- */
-/* ------------- A ANALISAR --------------- */
-.lfv-canvas__display-container {
-  margin: 0 auto;
-  position: relative;
-  width: 40vmin; 
-  height: 48vmin; 
-  margin-top: vmin;
-}
-.lfv-canvas__display {
-  vertical-align: bottom;
-  width: 48vmin;
-  height: 48vmin;
-}
-.wrapper {
-  margin: 0 auto;
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  background-position-x: center; 
-  background-position-y: center;
-  align-self: center;
-}
-
-#controls { 
-  color: rgb(16, 245, 62);
-  font-size: 14px;
-  margin: 24px 0;
-}
-
-.link {
-  color: inherit;
-  line-height: 36px;
-  float: right;
-  margin: 0 16px;
-}
-
-
-/**
-  *	Help window
-  */
-.lfv-help {
-  background-color: #212125;
   box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.5);
-  color: #eee;
-  line-height: 1.4;
-  margin: 0 15%;
-  position: absolute;
-  top: 10%;
-}
-.lfv-help__header {
-  background-color: #303035;
-  height: 32px;
-  line-height: 32px;
-  padding: 12px 28px;
-}
-.lfv-help__close {
-  float: right;
-}
-.lfv-help__icon-close {
-  display: block;
-  height: 14px;
-  width: 14px;
-}
-.lfv-help__icon-close > line {
-  stroke: #141417;
-  stroke-width: 2;
-}
-.lfv-help__content {
-  box-sizing: border-box;
-  font-size: 14px;
-  overflow: auto;
-  padding: 22px 28px;
-}
-.lfv-help__content-splitter {
-  border-top: 1px solid #303035;
-  margin-top: 14px;
-  padding-top: 14px;
-}
-.lfv-help__content-title {
-  font-size: 16px;
-  padding-right: 28px;
-}
-
-
-
-/* ---------------- INDICADOR DO CLIQUE NO REFOCUS, AINDA NÃO IMPLEMENTADO ---------------- */
-/* ------------------------- vai precisar estar na própria imagem ------------------------- */
-
-.lfv-focus-marker {
-  display: block;
-  width: 64px;
-  height: 64px;
-  left: -32px;
-  top: -32px;
-  pointer-events: none;
-  position: absolute;
-}
-.lfv-focus-marker_hidden {
-  display: none;
-  width: 64px;
-  height: 64px;
-  left: -32px;
-  top: -32px;
-}
-
-label{
-  position:inherit;
-  top: -50vmin;
-  right: -20vmin;
-}
-progress {
-  --_radius: 1e3px;
-
-  /*  reset  */
-  appearance: none;
-  border: none;
-
-  border-radius: var(--_radius);
-  overflow: hidden;
-  top: -20vmin;
-  right: 10vmin;
-  height: 15px;
-  width: 50vmin;
-}
-progress::-webkit-progress-value { background: blue; }
-
-progress:not([max])[value="1"]::before,
-progress[max="100"][value="100"]::before {
-  content: "✓";
-  
-  position: absolute;
-  inset-block: 0;
-  inset-inline: auto 0;
+  border-radius: 1vmin;
+  cursor: pointer;
   display: flex;
-  align-items: center;
-  padding-inline-end: max(calc(var(--_track-size) / 4), 3px);
-
-  font-size: calc(var(--_track-size) / 1.25);
-}
-
-#myProgress {
-  width: 50%;
-  background-color: grey;
-  position: absolute;
-  top: 34vmin;
-  right: 24vmin;
-}
-
-#myBar {
-  width: 1%;
-  height: 30px;
-  background-color: blue;
-  
+  justify-content: center;
 }
