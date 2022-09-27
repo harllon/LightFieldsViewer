@@ -13,7 +13,7 @@ var buttonAirplane = document.getElementById("airplane")
 let files;
 let size; 
 buttonGreek.onclick = function(){
-    makeRequest('get', 'http://172.15.4.172:3000/src/public/datasets/greek')
+    makeRequest('get', 'http://localhost:3000/src/public/datasets/greek')
     setDispRange(-3.5, 3.1);
 };
 

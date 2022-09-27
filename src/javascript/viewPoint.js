@@ -61,7 +61,7 @@ function loadRadios(size){
     
     var n = Math.sqrt(size)
     var dimensionW = n*21;
-    var dimensionH = n*(19.5);
+    var dimensionH = n*(21);
     containing.style.width = dimensionW.toString() + "px";
     containing.style.height = dimensionH.toString() + "px";
 
