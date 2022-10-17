@@ -21,11 +21,6 @@ function createImageMatrix(size){
             image.addEventListener('load', loading)
         })
     })
-
-    //var elem = document.getElementById("myProgress");
-    //elem.max = size+5
-    //console.log("Valor da linha da matriz")
-    //console.log(imgMatrix)
 }
 
 
@@ -33,9 +28,6 @@ var nImg = 0;
 function loading(){
     document.body.style.cursor = "wait"
     nImg++
-    /*var elem = document.getElementById("myProgress");
-    elem.value = nImg
-    elem.focus()*/
     if(nImg == size){
         CreateSubImagesPixelMatrix()
         nImg = 0;
@@ -59,22 +51,11 @@ function CreateSubImagesPixelMatrix(){
             img = imgMatrix[i][j]
             matrixPixels = createPixelMatrix(img);
             matrixSubImages[i].push(matrixPixels)
-
-            /*var elem = document.getElementById("myProgress");
-            nImg++;
-            elem.value = nImg
-            elem.focus()*/
         }
     }
 
     loadImage(0);
     document.body.style.cursor = "auto"
-    
-    /*nImg = 0;
-    var elem = document.getElementById("myProgress");
-    elem.value = 0;
-    elem.style.display = "none"
-    document.body.style.cursor = "auto"*/
 }
 
 function createPixelMatrix(img){

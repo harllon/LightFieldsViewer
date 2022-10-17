@@ -8,13 +8,13 @@ function setDispRange(minDisp, maxDisp){
 }
 
 function rangeChange(){
+    document.body.style.cursor = "wait"
     var disp = this.value;
-    console.log(disp);
     shiftSumRefocus(disp)
 }
 
 function shiftSumRefocus(disp, shift = 0.2){
-    //document.body.style.cursor = "wait"
+    document.body.style.cursor = "wait"
     var red = 0;
     var blue = 0;
     var green = 0;
@@ -44,10 +44,10 @@ function shiftSumRefocus(disp, shift = 0.2){
                     alpha = alpha + matrixSubImages[i][j][newU][newV][3];
                 }
             }
-            red = parseInt(red/size) > 255 ? 255 : parseInt(red/size)
-            green = parseInt(green/size) > 255 ? 255 : parseInt(green/size)
-            blue = parseInt(blue/size) > 255 ? 255 : parseInt(blue/size)
-            alpha = alpha > 255 ? 255 : alpha
+            red = parseInt(red/size) 
+            green = parseInt(green/size) 
+            blue = parseInt(blue/size) 
+            alpha = parseInt(alpha/size)
 
             subImageMatrix[u][v][0] = red; 
             subImageMatrix[u][v][1] = green; 
@@ -59,6 +59,7 @@ function shiftSumRefocus(disp, shift = 0.2){
 }
 
 function createRefocusedImage(subImageMatrix){
+    document.body.style.cursor = "wait"
     const canvas = document.getElementById('cv'); 
     const ctx = canvas.getContext('2d'); 
 
@@ -85,6 +86,6 @@ function createRefocusedImage(subImageMatrix){
     
     document.getElementById("mainImage").src = src
     
-    //document.body.style.cursor = "auto"
+    document.body.style.cursor = "auto"
 
 }
