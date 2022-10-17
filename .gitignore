@@ -2,5 +2,5 @@ node_modules
 backup
 172.20.10.50
 .DS_Store
-renomear.py
-changeOrder.py
+src/util/renomear.py
+src/util/changeOrder.py
