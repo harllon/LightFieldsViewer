@@ -49,8 +49,8 @@ Agora você pode brincar o quanto quiser! Se você tiver dúvidas de como usar o
 
 A partir de agora, vamos explicar como inserir novos datasets ao software.
 
-1) Copie as imagens para a pasta datasets. Preste atenção em dois fatores:
-1.1) Os arquivos devem seguir uma nomenclatura padrão. Exemplo: 005_009.png. Os 3 primeiros números indicam a linha da matriz de imagens ao qual a imagem pertence e os 3 últimos indicam a coluna.
+1) Copie as imagens para a pasta datasets. Preste atenção em dois fatores:<br>
+1.1) Os arquivos devem seguir uma nomenclatura padrão. Exemplo: 005_009.png. Os 3 primeiros números indicam a linha da matriz de imagens ao qual a imagem pertence e os 3 últimos indicam a coluna.<br>
 1.2) Crie uma nova pasta para colocar as imagens de forma que o caminho fique datasets/(seu diretorio)
 2) Vá até o index.html e crie um novo botão para seu dataset, basta seguir a estrutura já criada para o "Airplane" dataset.
 3) Vá até o requisition.js e crie uma referência ao botão criada com:  "document.getElementById(id)". Após isto, crie uma nova requisição "get" para o seguinte endereço 'http://localhost:3000/src/public/datasets/(seu dataset)'. Basta seguir a estrutura criada para o "airplane" e n"ao se esqueça de passar um intervalo de disparidade!
