@@ -1,4 +1,4 @@
-# pfc_lightfieldViewer
+# Light Fields Viewer
 
 Hello! Welcome to our project "Light Fields Viewer". This work was made as a final project for conclusion of our bachelor degree on Computer Engineering 
 at Military Engineering Institute (IME).
