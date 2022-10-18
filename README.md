@@ -21,8 +21,8 @@ Now, let's talk about how to include new datasets.
 
 To include new datasets, follow these steps:
 
-1) Copy the files to the datasets folder. Please pay attention in two factors:
-1.1) The image files need to follow a specific pattern of name. Example: 005_009.png. The first three numbers carry information about the row of the image matrix that this image belongs. The last three numbers carry information about the column.
+1) Copy the files to the datasets folder. Please pay attention in two factors:<br>
+1.1) The image files need to follow a specific pattern of name. Example: 005_009.png. The first three numbers carry information about the row of the image matrix that this image belongs. The last three numbers carry information about the column.<br>
 1.2) Create a new folder inside the datasets directory to put all your image files.
 2) Go to index.html and create a new button for your dataset, following the structure created on the file.
 3) Go to requisition.js, access the button created with: "document.getElementById(id)" and create a new "get" requisition for the following address 'http://localhost:3000/src/public/datasets/(your file name)'. Don't forget to pass the disparity range.
