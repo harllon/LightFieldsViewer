@@ -6,7 +6,7 @@ let files;
 let size; 
 
 buttonAirplane.onclick = function(){
-    makeRequest('get', 'http://localhost:3000/src/public/demo/airplane')
+    makeRequest('get', 'http://localhost:3000/src/public/datasets/demo/airplane')
     setDispRange(-2.0, 1.1);
 };
 

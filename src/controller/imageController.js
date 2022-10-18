@@ -4,8 +4,8 @@ const readdir = util.promisify(fs.readdir);
 const utilFunctions = require('../util/utilFunctions')
 
 const airplaneController = async (req, res) => {
-    var folder = './src/public/demo/airplane';
-    var imgSrc = './public/demo/airplane';
+    var folder = './src/public/datasets/demo/airplane';
+    var imgSrc = './public/datasets/demo/airplane';
     await readdir(folder).then(files => {
         var data = utilFunctions.createObject(files, imgSrc);
         res.status(200).json(data);

@@ -9,7 +9,7 @@ router.get('/', (req, res, next) =>{
 });
 
 
-router.get('/src/public/demo/airplane', controller.airplaneController);
+router.get('/src/public/datasets/demo/airplane', controller.airplaneController);
 
 
 module.exports = router;
